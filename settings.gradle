@@ -1,0 +1,2 @@
+include ':app', ':aidlserver'
+include ':openCVLibrary345'

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/cl_custom_canvas"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context=".activity.CustomCanvasActivity"
+  tools:layout_editor_absoluteY="25dp">
+
+  <com.andrewtse.testdemo.custom_canvas_view.CustomCanvasView
+    android:id="@+id/canvas_view"
+    android:layout_width="384dp"
+    android:layout_height="0dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="@id/btn_redo"
+    app:layout_constraintStart_toEndOf="@id/btn_redo"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <Button
+    android:id="@+id/btn_clear"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="清除"
+    app:layout_constraintBaseline_toBaselineOf="@id/btn_redo"
+    app:layout_constraintEnd_toStartOf="@id/btn_screen_shot"
+    app:layout_constraintStart_toEndOf="@id/btn_redo" />
+
+  <Button
+    android:id="@+id/btn_undo"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="撤销"
+    app:layout_constraintBaseline_toBaselineOf="@id/btn_redo"
+    app:layout_constraintEnd_toStartOf="@id/btn_redo"
+    app:layout_constraintHorizontal_chainStyle="packed"
+    app:layout_constraintStart_toStartOf="parent" />
+  <Button
+    android:id="@+id/btn_redo"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    android:text="恢复"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toStartOf="@id/btn_clear"
+    app:layout_constraintStart_toEndOf="@id/btn_undo" />
+  <Button
+    android:id="@+id/btn_screen_shot"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="截图"
+    app:layout_constraintBaseline_toBaselineOf="@id/btn_clear"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@id/btn_clear" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

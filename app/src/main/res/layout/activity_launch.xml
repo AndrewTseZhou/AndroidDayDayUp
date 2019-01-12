@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/coordinator_layout"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context=".LaunchActivity"
+  tools:layout_editor_absoluteY="25dp">
+
+  <ScrollView
+    android:id="@+id/sv_1"
+    android:layout_width="0dp"
+    android:layout_height="match_parent">
+    <LinearLayout
+      android:id="@+id/linearLayout"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical">
+      <Button
+        android:id="@+id/btn_rc_activity_click"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RC Activity"
+        android:textAllCaps="false" />
+
+      <Button
+        android:id="@+id/btn_temp_activity_click"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Temp Activity"
+        android:textAllCaps="false" />
+
+      <Button
+        android:id="@+id/btn_bezier_activity_click"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bezier Activity"
+        android:textAllCaps="false" />
+
+      <Button
+        android:id="@+id/btn_timer_activity_click"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Timer Activity"
+        android:textAllCaps="false" />
+
+      <Button
+        android:id="@+id/btn_qr_code_activity_click"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="QR Code Activity"
+        android:textAllCaps="false" />
+
+      <Button
+        android:id="@+id/btn_jni_activity_click"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="JNI_Activity"
+        android:textAllCaps="false" />
+
+      <Button
+        android:id="@+id/btn_memory_activity_click"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="内存泄漏Activity"
+        android:textAllCaps="false" />
+
+      <Button
+        android:id="@+id/btn_gson_activity_click"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gson Activity"
+        android:textAllCaps="false" />
+
+      <Button
+        android:id="@+id/btn_sophix_activity_click"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sophix Activity"
+        android:textAllCaps="false" />
+
+      <Button
+        android:id="@+id/btn_canvas_activity_click"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Custom_Canvas Activity"
+        android:textAllCaps="false" />
+
+      <Button
+        android:id="@+id/btn_receiver_activity_click"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="广播接收者 Activity"
+        android:textAllCaps="false" />
+
+      <Button
+        android:id="@+id/btn_pending_intent_activity_click"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pending Intent Activity"
+        android:textAllCaps="false" />
+
+      <Button
+        android:id="@+id/btn_screen_shot_activity_click"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="屏幕截图 Activity"
+        android:textAllCaps="false" />
+
+      <Button
+        android:id="@+id/btn_switch_button_activity_click"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="自定义开关 Activity"
+        android:textAllCaps="false" />
+
+      <Button
+        android:id="@+id/btn_swipelayout_activity_click"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SwipeLayout Activity"
+        android:textAllCaps="false" />
+
+      <Button
+        android:id="@+id/btn_toolbar_activity_click"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="抽屉效果_Toolbar Activity"
+        android:textAllCaps="false" />
+
+      <Button
+        android:id="@+id/btn_appbar_activity_click"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AppBar Activity"
+        android:textAllCaps="false" />
+    </LinearLayout>
+  </ScrollView>
+
+  <ScrollView
+    android:id="@+id/sv_2"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_marginStart="5dp"
+    app:layout_constraintLeft_toRightOf="@id/sv_1">
+    <LinearLayout
+      android:id="@+id/linearLayout2"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical">
+
+      <Button
+        android:id="@+id/btn_aidl_activity_click"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AIDL Activity"
+        android:textAllCaps="false" />
+
+      <Button
+        android:id="@+id/btn_provider_activity_click"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ContentProvider Activity"
+        android:textAllCaps="false" />
+
+      <Button
+        android:id="@+id/btn_retrofit_activity_click"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Retrofit Activity"
+        android:textAllCaps="false" />
+
+      <Button
+        android:id="@+id/btn_animation_activity_click"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="动画 Activity"
+        android:textAllCaps="false" />
+
+      <Button
+        android:id="@+id/btn_view_drag_helper_activity_click"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ViewDragHelper Activity"
+        android:textAllCaps="false" />
+
+      <Button
+        android:id="@+id/btn_navigation_activity_click"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="底部导航栏 Activity"
+        android:textAllCaps="false" />
+
+      <Button
+        android:id="@+id/btn_view_move_activity_click"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View运动 Activity"
+        android:textAllCaps="false" />
+
+      <Button
+        android:id="@+id/btn_image_scale_activity_click"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="图片缩放 Activity"
+        android:textAllCaps="false" />
+
+      <Button
+        android:id="@+id/btn_immersive_activity_click"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="沉浸式 Activity"
+        android:textAllCaps="false" />
+
+      <Button
+        android:id="@+id/btn_ability_activity_click"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="能力分析图 Activity"
+        android:textAllCaps="false" />
+
+      <Button
+        android:id="@+id/btn_opencv_activity_click"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OpenCV Activity"
+        android:textAllCaps="false" />
+
+      <Button
+        android:id="@+id/btn_audio_activity_click"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="音频相关 Activity"
+        android:textAllCaps="false" />
+    </LinearLayout>
+  </ScrollView>
+
+  <!--<android.support.design.widget.FloatingActionButton-->
+  <!--android:id="@+id/fab"-->
+  <!--android:layout_width="wrap_content"-->
+  <!--android:layout_height="wrap_content"-->
+  <!--app:borderWidth="0dp"-->
+  <!--app:layout_anchor="@id/coordinator_layout"-->
+  <!--app:layout_anchorGravity="bottom|right" />-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

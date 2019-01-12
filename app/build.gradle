@@ -1,0 +1,84 @@
+apply plugin: 'com.android.application'
+//阿里云需要使用，由于日均设备免费次数20次，需要的时候再打开
+//apply plugin: 'com.aliyun.ams.emas-services'
+apply plugin: 'android-aspectjx'
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
+    defaultConfig {
+        applicationId "com.andrewtse.testdemo"
+        minSdkVersion 17
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        externalNativeBuild {
+            cmake {
+//                arguments "-DANDROID_ARM_NEON=TRUE", "-DANDROID_TOOLCHAIN=clang", "-DCMAKE_BUILD_TYPE=Release"
+//                , "-DANDROID_STL=gnustl_shared"
+                cppFlags "-std=c++11", "-frtti", "-fexceptions"
+//                arguments '-DANDROID_STL=gnustl_shared'   //支持C++异常处理标准模板库
+            }
+        }
+
+        ndk {
+            abiFilters 'armeabi-v7a'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            jniDebuggable true
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            path file('CMakeLists.txt')
+        }
+    }
+
+//    sourceSets.main {
+//        jniLibs.srcDirs = ['libs']
+//        jni.srcDirs = []
+//    }
+
+    useLibrary 'org.apache.http.legacy'
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'androidx.appcompat:appcompat:1.1.0-alpha01'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    implementation 'com.google.android.material:material:1.1.0-alpha02'
+    implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.aliyun.ams:alicloud-android-hotfix:3.2.6'
+    implementation 'org.aspectj:aspectjrt:1.9.2'
+    implementation 'com.daimajia.swipelayout:library:1.2.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.12.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    //    implementation 'cn.bmob.android:bmob-sdk:3.6.8-rc4'
+    //    implementation 'io.reactivex.rxjava2:rxjava:2.2.2'
+    //    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    //    implementation 'com.squareup.okio:okio:2.1.0'
+    //    compile 'cn.bmob.android:http-legacy:1.0'
+    implementation 'com.jakewharton:butterknife:10.0.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
+    implementation project(':openCVLibrary345')
+}

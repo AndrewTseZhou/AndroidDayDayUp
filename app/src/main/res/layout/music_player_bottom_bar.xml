@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="60dp"
+  android:paddingEnd="16dp"
+  android:foreground="?android:attr/selectableItemBackground"
+  android:orientation="horizontal"
+  app:layout_constraintBottom_toBottomOf="parent">
+
+  <ImageView
+    android:id="@+id/id_iv_icon"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:src="@mipmap/icon_default" />
+
+
+  <LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerVertical="true"
+    android:layout_toRightOf="@id/id_iv_icon"
+    android:orientation="vertical">
+
+    <TextView
+      android:id="@+id/id_tv_music_name"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="勇气"
+      android:textColor="#363636"
+      android:textSize="18sp" />
+
+    <TextView
+      android:id="@+id/id_tv_singer"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="梁静茹"
+      android:textColor="#898989"
+      android:textSize="12sp" />
+  </LinearLayout>
+
+
+  <ImageView
+    android:id="@+id/id_iv_ctrl"
+    android:layout_width="28dp"
+    android:layout_height="28dp"
+    android:layout_margin="8dp"
+    android:layout_centerVertical="true"
+    android:layout_toLeftOf="@id/id_iv_next"
+    android:src="@drawable/icon_stop_2" />
+
+  <com.andrewtse.testdemo.sound.widget.AlphaImageView
+    android:id="@+id/id_iv_next"
+    android:layout_width="28dp"
+    android:layout_height="28dp"
+    android:layout_margin="8dp"
+    android:layout_centerVertical="true"
+    android:layout_toLeftOf="@id/id_iv_pre_list"
+    android:src="@drawable/icon_next" />
+
+  <com.andrewtse.testdemo.sound.widget.AlphaImageView
+    android:id="@+id/id_iv_pre_list"
+    android:layout_width="28dp"
+    android:layout_height="28dp"
+    android:layout_margin="8dp"
+    android:layout_alignParentEnd="true"
+    android:layout_centerVertical="true"
+    android:src="@drawable/icon_music_list" />
+
+</RelativeLayout>

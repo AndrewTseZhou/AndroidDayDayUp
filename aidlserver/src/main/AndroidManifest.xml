@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  package="com.andrewtse.aidlserver">
+
+  <!--<permission-->
+    <!--android:name="com.andrewtse.aidlserver.AIDL_SERVICE"-->
+    <!--android:protectionLevel="normal" />-->
+
+  <application>
+    <service
+      android:enabled="true"
+      android:exported="true"
+      android:name=".MyAidlService"
+      android:process=":remote">
+      <intent-filter>
+        <category android:name="android.intent.category.DEFAULT" />
+
+        <action android:name="com.andrewtse.aidlserver.AIDL_SERVICE" />
+      </intent-filter>
+    </service>
+
+  </application>
+
+</manifest>
