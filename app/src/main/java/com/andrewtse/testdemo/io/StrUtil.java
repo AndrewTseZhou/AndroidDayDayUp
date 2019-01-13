@@ -8,9 +8,6 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 作者：张风捷特烈
- * 时间：2018/2/20:17:57
- * 邮箱：1981462002@qq.com
  * 说明：字符串相关工具类
  */
 public class StrUtil {

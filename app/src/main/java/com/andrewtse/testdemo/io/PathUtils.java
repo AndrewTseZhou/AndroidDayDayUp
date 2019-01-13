@@ -5,10 +5,7 @@ import android.os.Environment;
 
 
 /**
- * 作者：张风捷特烈<br/>
- * 时间：2018/4/26:9:24<br/>
- * 邮箱：1981462002@qq.com<br/>
- * 说明：路径工具<br/>
+ * 说明：路径工具
  */
 public class PathUtils {
     /**

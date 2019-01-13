@@ -15,10 +15,7 @@ import java.io.InputStream;
 
 
 /**
- * 作者：张风捷特烈<br/>
- * 时间：2018/2/18:15:06<br/>
- * 邮箱：1981462002@qq.com <br/>
- * 说明：文件帮助类 单例模式<br/>
+ * 说明：文件帮助类 单例模式
  */
 public class FileHelper {
 

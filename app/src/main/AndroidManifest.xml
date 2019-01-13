@@ -126,7 +126,10 @@
     <activity android:name=".activity.PCMActivity" />
     <activity android:name=".activity.AudioActivity" />
     <activity android:name=".activity.MediaPlayerActivity" />
-    <activity android:name=".activity.MediaRecorderActivity"></activity>
+    <activity android:name=".activity.MediaRecorderActivity" />
+    <activity android:name=".activity.CameraActivity" />
+    <activity android:name=".activity.CameraDemoActivity" />
+    <activity android:name=".activity.Camera2Activity" />
   </application>
 
 </manifest>

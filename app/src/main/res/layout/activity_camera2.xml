@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context=".activity.CameraActivity"
+  tools:layout_editor_absoluteY="25dp">
+
+  <SurfaceView
+    android:id="@+id/sv_video"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="30dp"
+    android:orientation="horizontal"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <ImageView
+      android:id="@+id/iv_flash"
+      android:layout_width="30dp"
+      android:layout_height="30dp"
+      android:padding="5dp"
+      android:src="@drawable/icon_flash"
+      app:layout_constraintEnd_toStartOf="@+id/iv_hdr"
+      app:layout_constraintHorizontal_bias="0.7"
+      app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+      android:id="@+id/iv_hdr"
+      android:layout_width="30dp"
+      android:layout_height="30dp"
+      android:layout_toEndOf="@id/iv_flash"
+      android:padding="5dp"
+      android:src="@drawable/icon_hdr"
+      app:layout_constraintEnd_toStartOf="@+id/iv_delay"
+      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintStart_toEndOf="@+id/iv_flash" />
+
+    <ImageView
+      android:id="@+id/iv_delay"
+      android:layout_width="30dp"
+      android:layout_height="30dp"
+      android:layout_toStartOf="@id/iv_focus"
+      android:padding="5dp"
+      android:src="@drawable/icon_delay"
+      app:layout_constraintEnd_toStartOf="@+id/iv_focus"
+      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintStart_toEndOf="@+id/iv_hdr" />
+
+    <ImageView
+      android:id="@+id/iv_focus"
+      android:layout_width="30dp"
+      android:layout_height="30dp"
+      android:layout_alignParentEnd="true"
+      android:padding="5dp"
+      android:src="@drawable/icon_focus"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintStart_toEndOf="@+id/iv_delay" />
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="20dp"
+    app:layout_constraintBottom_toTopOf="@id/iv_rl_snap">
+
+    <ImageView
+      android:layout_width="35dp"
+      android:layout_height="35dp"
+      android:layout_marginEnd="5dp"
+      android:layout_centerInParent="true"
+      android:layout_toStartOf="@id/iv_filter"
+      android:padding="5dp"
+      android:background="@drawable/shape_bg_circle"
+      android:src="@drawable/icon_face" />
+
+    <TextView
+      android:id="@+id/iv_zoom"
+      android:layout_width="35dp"
+      android:layout_height="35dp"
+      android:layout_marginStart="20dp"
+      android:layout_centerInParent="true"
+      android:padding="4dp"
+      android:background="@drawable/shape_bg_circle"
+      android:gravity="center"
+      android:text="1.0x"
+      android:textColor="#fff" />
+
+    <ImageView
+      android:id="@+id/iv_filter"
+      android:layout_width="35dp"
+      android:layout_height="35dp"
+      android:layout_marginEnd="10dp"
+      android:layout_alignParentEnd="true"
+      android:layout_centerVertical="true"
+      android:padding="5dp"
+      android:background="@drawable/shape_bg_circle"
+      android:src="@drawable/icon_filter" />
+  </RelativeLayout>
+
+  <RelativeLayout
+    android:id="@+id/iv_rl_snap"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintBottom_toTopOf="@id/bottom_container">
+
+    <ImageView
+      android:id="@+id/iv_show"
+      android:layout_width="70dp"
+      android:layout_height="70dp"
+      android:layout_marginEnd="20dp"
+      android:layout_centerInParent="true"
+      android:layout_toStartOf="@id/iv_snap"
+      android:padding="10dp"
+      android:src="@drawable/shape_oval" />
+
+    <ImageView
+      android:id="@+id/iv_switch"
+      android:layout_width="70dp"
+      android:layout_height="70dp"
+      android:layout_marginStart="20dp"
+      android:layout_toEndOf="@id/iv_snap"
+      android:padding="15dp"
+      android:src="@drawable/icon_switch" />
+
+    <ImageView
+      android:id="@+id/iv_snap"
+      android:layout_width="70dp"
+      android:layout_height="70dp"
+      android:layout_centerInParent="true"
+      android:padding="5dp"
+      android:src="@drawable/shape_ring" />
+  </RelativeLayout>
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/bottom_container"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="50dp"
+    android:background="#00B8DDF4"
+    app:layout_constraintBottom_toBottomOf="parent">
+
+    <TextView
+      android:id="@+id/tv_pic"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerVertical="true"
+      android:text="照片"
+      android:textColor="#F5C120"
+      android:textSize="20sp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toStartOf="@+id/tv_video"
+      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+      android:id="@+id/tv_video"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerVertical="true"
+      android:text="视频"
+      android:textColor="#fff"
+      android:textSize="20sp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintStart_toEndOf="@+id/tv_pic"
+      app:layout_constraintTop_toTopOf="parent" />
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+  <TextView
+    android:id="@+id/tv_count_down"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:background="@drawable/shape_oval"
+    android:gravity="center"
+    android:text="3"
+    android:textSize="50sp"
+    android:visibility="gone"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

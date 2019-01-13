@@ -2,12 +2,12 @@ package com.andrewtse.testdemo;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import com.andrewtse.testdemo.activity.AIDLActivity;
 import com.andrewtse.testdemo.activity.AbilityActivity;
 import com.andrewtse.testdemo.activity.AnimationActivity;
@@ -15,6 +15,7 @@ import com.andrewtse.testdemo.activity.AppBarLayoutActivity;
 import com.andrewtse.testdemo.activity.AudioActivity;
 import com.andrewtse.testdemo.activity.BezierActivity;
 import com.andrewtse.testdemo.activity.BottomNavActivity;
+import com.andrewtse.testdemo.activity.CameraDemoActivity;
 import com.andrewtse.testdemo.activity.CustomCanvasActivity;
 import com.andrewtse.testdemo.activity.DrawerLayoutAndToolBarActivity;
 import com.andrewtse.testdemo.activity.GsonDemoActivity;
@@ -88,6 +89,7 @@ public class LaunchActivity extends AppCompatActivity implements OnClickListener
         findViewById(R.id.btn_ability_activity_click).setOnClickListener(this);
         findViewById(R.id.btn_opencv_activity_click).setOnClickListener(this);
         findViewById(R.id.btn_audio_activity_click).setOnClickListener(this);
+        findViewById(R.id.btn_camera_activity_click).setOnClickListener(this);
 
 //        findViewById(R.id.fab).setOnClickListener(new OnClickListener() {
 //            @Override
@@ -229,6 +231,9 @@ public class LaunchActivity extends AppCompatActivity implements OnClickListener
                 break;
             case R.id.btn_audio_activity_click:
                 intent = new Intent(this, AudioActivity.class);
+                break;
+            case R.id.btn_camera_activity_click:
+                intent = new Intent(this, CameraDemoActivity.class);
                 break;
         }
         startActivity(intent);

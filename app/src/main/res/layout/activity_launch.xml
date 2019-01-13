@@ -233,6 +233,13 @@
         android:layout_height="wrap_content"
         android:text="音频相关 Activity"
         android:textAllCaps="false" />
+
+      <Button
+        android:id="@+id/btn_camera_activity_click"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="相机 Activity"
+        android:textAllCaps="false" />
     </LinearLayout>
   </ScrollView>
 
