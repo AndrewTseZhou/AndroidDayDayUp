@@ -10,7 +10,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath 'com.android.tools.build:gradle:3.3.0'
         // 添加emas-services插件
         classpath 'com.aliyun.ams:emas-services:1.0.1'
         classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.4'
