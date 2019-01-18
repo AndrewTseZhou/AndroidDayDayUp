@@ -15,5 +15,16 @@ Java_com_andrewtse_testdemo_activity_JniActivity_nativeToast(JNIEnv *env, jclass
 extern "C"
 JNIEXPORT jint JNICALL
 Java_com_andrewtse_testdemo_activity_JniActivity_nativeCal(JNIEnv *env, jclass type, jint a, jint b, jchar op) {
-    return a + b;
+    switch (op) {
+        case '+':
+            return a + b;
+        case '-':
+            return a - b;
+        case '*':
+            return a * b;
+        case '/':
+            return a / b;
+        default:
+            return 0;
+    }
 }
