@@ -16,10 +16,9 @@ android {
 
         externalNativeBuild {
             cmake {
-//                arguments "-DANDROID_ARM_NEON=TRUE", "-DANDROID_TOOLCHAIN=clang", "-DCMAKE_BUILD_TYPE=Release"
-//                , "-DANDROID_STL=gnustl_shared"
-                cppFlags "-std=c++11", "-frtti", "-fexceptions"
-//                arguments '-DANDROID_STL=gnustl_shared'   //支持C++异常处理标准模板库
+                arguments "-DANDROID_ARM_NEON=TRUE", "-DANDROID_TOOLCHAIN=clang","-DCMAKE_BUILD_TYPE=Release"
+//                '-DANDROID_STL=c++_static'
+                cppFlags "-std=c++11","-frtti", "-fexceptions"
             }
         }
 
@@ -41,6 +40,7 @@ android {
     externalNativeBuild {
         cmake {
             path file('CMakeLists.txt')
+            version "3.10.2"
         }
     }
 

@@ -130,6 +130,10 @@
     <activity android:name=".activity.CameraActivity" />
     <activity android:name=".activity.CameraDemoActivity" />
     <activity android:name=".activity.Camera2Activity" />
+    <activity
+      android:configChanges="keyboardHidden|orientation"
+      android:name=".opencv.FaceDetectActivity" />
+    <activity android:name=".opencv.ImgProcessActivity" />
   </application>
 
 </manifest>

@@ -1,112 +1,59 @@
 package com.andrewtse.testdemo.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
-import android.util.Log;
-import android.view.WindowManager;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.andrewtse.testdemo.R;
-import org.opencv.android.BaseLoaderCallback;
-import org.opencv.android.CameraBridgeViewBase;
-import org.opencv.android.JavaCameraView;
-import org.opencv.android.LoaderCallbackInterface;
-import org.opencv.android.OpenCVLoader;
-import org.opencv.core.CvType;
-import org.opencv.core.Mat;
+import com.andrewtse.testdemo.opencv.FaceDetectActivity;
+import com.andrewtse.testdemo.opencv.ImgProcessActivity;
 
-public class OpenCVActivity extends AppCompatActivity implements CameraBridgeViewBase.CvCameraViewListener2 {
+public class OpenCVActivity extends AppCompatActivity {
 
     private static final String TAG = "OpenCVActivity";
-
-    private Mat mRgba;
-    private Mat mIntermediateMat;
-    private Mat mGray;
-
-    private JavaCameraView mOpenCvCameraView;
-
-    static {
-        System.loadLibrary("opencv_java3");
-        System.loadLibrary("native-lib");
-    }
-
-    private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
-        @Override
-        public void onManagerConnected(int status) {
-            switch (status) {
-                case LoaderCallbackInterface.SUCCESS:
-                    Log.i(TAG, "OpenCV loaded successfully");
-                    mOpenCvCameraView.enableView();
-                    break;
-                default:
-                    super.onManagerConnected(status);
-                    break;
-            }
-        }
-    };
+    @BindView(R.id.btn_hello)
+    Button mBtnHello;
+    @BindView(R.id.btn_faceDetect)
+    Button mBtnFaceDetect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_open_cv);
-
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
-        mOpenCvCameraView = findViewById(R.id.camera_view);
-        mOpenCvCameraView.setVisibility(CameraBridgeViewBase.VISIBLE);
-        mOpenCvCameraView.setCvCameraViewListener(this);
-        mOpenCvCameraView.setClickable(true);
-//        mOpenCvCameraView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Camera camera = ((JavaCameraView) mOpenCvCameraView).getCamera();
-//                if (camera != null) camera.autoFocus(null);
-//            }
-//        });
+        // 绑定View
+        ButterKnife.bind(this);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        if (mOpenCvCameraView != null)
-            mOpenCvCameraView.disableView();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (!OpenCVLoader.initDebug()) {
-            Log.d(TAG, "Internal OpenCV library not found. Using OpenCV Manager for initialization");
-            OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_3_0_0, this, mLoaderCallback);
-        } else {
-            Log.d(TAG, "OpenCV library found inside package. Using it!");
-            mLoaderCallback.onManagerConnected(LoaderCallbackInterface.SUCCESS);
-        }
     }
 
     public void onDestroy() {
         super.onDestroy();
-        if (mOpenCvCameraView != null) {
-            mOpenCvCameraView.disableView();
+    }
+
+    @OnClick({R.id.btn_hello, R.id.btn_faceDetect})
+    public void onViewClick(View view) {
+        int vId = view.getId();
+        switch (vId) {
+            case R.id.btn_hello:
+                Intent intentHello = new Intent(this, ImgProcessActivity.class);
+                startActivity(intentHello);
+                break;
+            case R.id.btn_faceDetect:
+                Intent intentFd = new Intent(this, FaceDetectActivity.class);
+                startActivity(intentFd);
+                break;
         }
     }
-
-    public void onCameraViewStarted(int width, int height) {
-        mRgba = new Mat(height, width, CvType.CV_8UC4);
-        mIntermediateMat = new Mat(height, width, CvType.CV_8UC4);
-        mGray = new Mat(height, width, CvType.CV_8UC1);
-    }
-
-    public void onCameraViewStopped() {
-        mRgba.release();
-        mGray.release();
-        mIntermediateMat.release();
-    }
-
-    public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
-        mRgba = inputFrame.rgba();
-        mGray = inputFrame.gray();
-        nativeProcessFrame(mGray.getNativeObjAddr(), mRgba.getNativeObjAddr());
-        return mRgba;
-    }
-
-    public native void nativeProcessFrame(long matAddrGr, long matAddrRgba);
 }
