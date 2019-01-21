@@ -133,6 +133,17 @@
       android:configChanges="keyboardHidden|orientation"
       android:name=".opencv.FaceDetectActivity" />
     <activity android:name=".opencv.ImgProcessActivity" />
+    <activity android:name=".opencv.BankCardOCRActivity" />
+
+    <provider
+      android:authorities="${applicationId}.provider"
+      android:exported="false"
+      android:grantUriPermissions="true"
+      android:name="androidx.core.content.FileProvider">
+      <meta-data
+        android:name="android.support.FILE_PROVIDER_PATHS"
+        android:resource="@xml/file_paths" />
+    </provider>
   </application>
 
 </manifest>
