@@ -16,6 +16,7 @@ import com.andrewtse.testdemo.activity.AudioActivity;
 import com.andrewtse.testdemo.activity.BezierActivity;
 import com.andrewtse.testdemo.activity.BottomNavActivity;
 import com.andrewtse.testdemo.activity.CameraDemoActivity;
+import com.andrewtse.testdemo.activity.ContentProviderActivity;
 import com.andrewtse.testdemo.activity.CustomCanvasActivity;
 import com.andrewtse.testdemo.activity.DrawerLayoutAndToolBarActivity;
 import com.andrewtse.testdemo.activity.GsonDemoActivity;
@@ -78,7 +79,7 @@ public class LaunchActivity extends AppCompatActivity implements OnClickListener
         findViewById(R.id.btn_toolbar_activity_click).setOnClickListener(this);
         findViewById(R.id.btn_appbar_activity_click).setOnClickListener(this);
         findViewById(R.id.btn_aidl_activity_click).setOnClickListener(this);
-//        findViewById(R.id.btn_provider_activity_click).setOnClickListener(this);
+        findViewById(R.id.btn_provider_activity_click).setOnClickListener(this);
         findViewById(R.id.btn_retrofit_activity_click).setOnClickListener(this);
         findViewById(R.id.btn_animation_activity_click).setOnClickListener(this);
         findViewById(R.id.btn_view_drag_helper_activity_click).setOnClickListener(this);
@@ -199,9 +200,9 @@ public class LaunchActivity extends AppCompatActivity implements OnClickListener
             case R.id.btn_aidl_activity_click:
                 intent = new Intent(this, AIDLActivity.class);
                 break;
-//            case R.id.btn_provider_activity_click:
-//                intent = new Intent(this, ContentProviderActivity.class);
-//                break;
+            case R.id.btn_provider_activity_click:
+                intent = new Intent(this, ContentProviderActivity.class);
+                break;
             case R.id.btn_retrofit_activity_click:
                 intent = new Intent(this, RetrofitActivity.class);
                 break;

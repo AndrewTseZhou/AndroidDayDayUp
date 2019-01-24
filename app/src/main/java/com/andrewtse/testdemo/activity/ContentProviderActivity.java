@@ -4,16 +4,30 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import androidx.appcompat.app.AppCompatActivity;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.andrewtse.testdemo.R;
+import java.util.ArrayList;
 
 public class ContentProviderActivity extends AppCompatActivity {
+
+    @BindView(R.id.lv_result)
+    ListView mLvResult;
+
+    private ArrayList<String> mList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_content_provider);
+        ButterKnife.bind(this);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mList);
+        mLvResult.setAdapter(adapter);
 
         /**
          * 对user表进行操作
@@ -28,27 +42,33 @@ public class ContentProviderActivity extends AppCompatActivity {
         resolver.insert(uriUser, values);
 
         Cursor cursor = resolver.query(uriUser, new String[]{"_id", "name"}, null, null, null);
-        while (cursor.moveToNext()) {
-            System.out.println("query: " + cursor.getInt(0) + " " + cursor.getString(1));
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                mList.add(cursor.getInt(0) + " --- " + cursor.getString(1));
+                System.out.println(cursor.getInt(0) + " --- " + cursor.getString(1));
+            }
+            cursor.close();
         }
-        cursor.close();
 
         /**
          * 对job表进行操作
          */
-        Uri uri_job = Uri.parse("content://com.andrew.mycontentprovider/job");
+        Uri uriJob = Uri.parse("content://com.andrew.mycontentprovider/job");
 
         ContentValues values2 = new ContentValues();
         values2.put("_id", 3);
         values2.put("job", "NBA Player");
 
-        ContentResolver resolver2 =  getContentResolver();
-        resolver2.insert(uri_job,values2);
+        ContentResolver resolver2 = getContentResolver();
+        resolver2.insert(uriJob, values2);
 
-        Cursor cursor2 = resolver2.query(uri_job, new String[]{"_id","job"}, null, null, null);
-        while (cursor2.moveToNext()){
-            System.out.println("query job:" + cursor2.getInt(0) +" "+ cursor2.getString(1));
+        Cursor cursor2 = resolver2.query(uriJob, new String[]{"_id", "job"}, null, null, null);
+        if (cursor2 != null) {
+            while (cursor2.moveToNext()) {
+                mList.add(cursor2.getInt(0) + " --- " + cursor2.getString(1));
+            }
+            cursor2.close();
         }
-        cursor2.close();
+        adapter.notifyDataSetChanged();
     }
 }

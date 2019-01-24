@@ -102,15 +102,15 @@
     <activity android:name=".activity.AppBarLayoutActivity" />
     <activity android:name=".activity.TestActivity" />
     <activity android:name=".activity.AIDLActivity" />
-    <!-- <activity android:name=".activity.ContentProviderActivity" /> -->
+    <activity android:name=".activity.ContentProviderActivity" />
 
+    <provider
+      android:authorities="com.andrew.mycontentprovider"
+      android:enabled="true"
+      android:exported="true"
+      android:name=".content_provider.MyContentProvider"
+      android:permission="com.andrew.PROVIDER" />
 
-    <!-- <provider -->
-    <!-- android:authorities="com.andrew.mycontentprovider" -->
-    <!-- android:enabled="true" -->
-    <!-- android:exported="true" -->
-    <!-- android:name=".content_provider.MyContentProvider" -->
-    <!-- android:permission="com.andrew.PROVIDER" /> -->
     <activity android:name=".activity.RetrofitActivity" />
     <activity android:name=".activity.AnimationActivity" />
     <activity android:name=".activity.ViewDragHelperActivity" />
