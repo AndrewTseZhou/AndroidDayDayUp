@@ -285,21 +285,21 @@ extern "C" JNIEXPORT void JNICALL Java_com_andrewtse_testdemo_opencv_DetectionBa
 //    }
 //}
 
-///*
-// * nativeRgba方法，处理预览帧
-// */
-//extern "C" JNIEXPORT void JNICALL Java_com_andrewtse_testdemo_opencv_DetectionBasedTracker_nativeRgba(JNIEnv *jenv, jclass jcls, jlong address, jint width, jint height) {
-//    Mat &img = *(Mat *) address;
-//    Mat imgT(height, width, CV_8UC4);
-//    Mat imgF(height, width, CV_8UC4);
-//
-//    // 图片倒置
-//    transpose(img, imgT);
-//    // 重定义图片大小
-//    resize(imgT, imgF, Size(width, height));
-//    // 垂直翻转图片
-//    flip(imgF, img, 1);
-//}
+/*
+ * nativeRgba方法，处理预览帧
+ */
+extern "C" JNIEXPORT void JNICALL Java_com_andrewtse_testdemo_opencv_DetectionBasedTracker_nativeRgba(JNIEnv *jenv, jclass jcls, jlong address, jint width, jint height) {
+    Mat &img = *(Mat *) address;
+    Mat imgT(height, width, CV_8UC4);
+    Mat imgF(height, width, CV_8UC4);
+
+    // 图片倒置
+    transpose(img, imgT);
+    // 重定义图片大小
+    resize(imgT, imgF, Size(width, height));
+    // 垂直翻转图片
+    flip(imgF, img, 1);
+}
 
 ///*
 // * 测量脸部移动
