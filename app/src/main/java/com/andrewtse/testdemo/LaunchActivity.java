@@ -13,7 +13,7 @@ import com.andrewtse.testdemo.activity.AbilityActivity;
 import com.andrewtse.testdemo.activity.AnimationActivity;
 import com.andrewtse.testdemo.activity.AppBarLayoutActivity;
 import com.andrewtse.testdemo.activity.AudioActivity;
-import com.andrewtse.testdemo.activity.BezierActivity;
+import com.andrewtse.testdemo.activity.BezierDemoActivity;
 import com.andrewtse.testdemo.activity.BottomNavActivity;
 import com.andrewtse.testdemo.activity.CameraDemoActivity;
 import com.andrewtse.testdemo.activity.ContentProviderActivity;
@@ -153,7 +153,7 @@ public class LaunchActivity extends AppCompatActivity implements OnClickListener
                 intent = new Intent(this, TempActivity.class);
                 break;
             case R.id.btn_bezier_activity_click:
-                intent = new Intent(this, BezierActivity.class);
+                intent = new Intent(this, BezierDemoActivity.class);
                 break;
             case R.id.btn_timer_activity_click:
                 intent = new Intent(this, TimerActivity.class);

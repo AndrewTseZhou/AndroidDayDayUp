@@ -47,6 +47,9 @@
     android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
     android:theme="@style/AppTheme">
+    <activity android:name=".bezier_view.water_wave.WaterWaveActivity" />
+    <activity android:name=".activity.BezierDemoActivity" />
+
     <meta-data
       android:name="com.taobao.android.hotfix.IDSECRET"
       android:value="25219040" />
@@ -67,7 +70,7 @@
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
-    <activity android:name=".activity.BezierActivity" />
+    <activity android:name=".bezier_view.BezierActivity" />
     <activity android:name=".activity.TimerActivity" />
     <activity android:name=".activity.QRCodeActivity" />
     <!-- 调整二维码扫描界面为竖屏 -->

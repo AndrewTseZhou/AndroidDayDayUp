@@ -1,11 +1,10 @@
-package com.andrewtse.testdemo.activity;
+package com.andrewtse.testdemo.bezier_view;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import com.andrewtse.testdemo.R;
-import com.andrewtse.testdemo.bezier_view.BezierView2;
 
 public class BezierActivity extends AppCompatActivity {
 
