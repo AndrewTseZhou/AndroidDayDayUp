@@ -10,9 +10,27 @@
     android:id="@+id/tv_translation"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="TextView"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
+    android:layout_marginTop="23dp"
+    android:layout_marginStart="25dp"
+    android:text="翻译结果:"
     app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/btn_tradition" />
+  <Button
+    android:id="@+id/btn_tradition"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="29dp"
+    android:layout_marginStart="16dp"
+    android:text="普通Retrofit调用"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+  <Button
+    android:id="@+id/btn_rx_java"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="28dp"
+    android:layout_marginStart="33dp"
+    android:text="结合RxJava调用"
+    app:layout_constraintStart_toEndOf="@+id/btn_tradition"
     app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
