@@ -61,6 +61,21 @@
     <!--一个自定义控件-->
     <declare-styleable name="ProgressView">
         <!--自定义属性名 和 类型-->
-        <attr name="z_bar_color" format="color"/>
+        <attr name="z_bar_color" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="HorizontalExpandMenu">
+        <attr name="hem_back_color" format="color" />
+        <attr name="hem_stroke_size" format="dimension" />
+        <attr name="hem_stroke_color" format="color" />
+        <attr name="hem_corner_radius" format="dimension" />
+        <attr name="hem_button_style">
+            <enum name="right" value="0" />
+            <enum name="left" value="1" />
+        </attr>
+        <attr name="hem_button_icon_size" format="dimension" />
+        <attr name="hem_button_icon_stroke_width" format="dimension" />
+        <attr name="hem_button_icon_color" format="color" />
+        <attr name="hem_expand_time" format="integer" />
     </declare-styleable>
 </resources>
