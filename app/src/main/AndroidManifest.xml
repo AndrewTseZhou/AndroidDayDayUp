@@ -1,152 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:tools="http://schemas.android.com/tools"
-  package="com.andrewtse.testdemo">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.andrewtse.testdemo">
+    <!-- 网络权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <!-- 外部存储读权限，调试工具加载本地补丁需要 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!-- 录制音频 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <!-- <uses-permission android:name="com.andrewtse.aidlserver.AIDL_SERVICE" /> -->
+    <permission
+        android:name="com.andrew.PROVIDER"
+        android:protectionLevel="normal" />
 
-  <!-- 网络权限 -->
-  <uses-permission android:name="android.permission.INTERNET" />
-  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-  <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-  <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-  <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-  <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-  <!-- 外部存储读权限，调试工具加载本地补丁需要 -->
-  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.andrew.PROVIDER" />
 
-  <!-- To auto-complete the email text field in the login form with the user's emails -->
-  <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-  <uses-permission android:name="android.permission.READ_PROFILE" />
-  <uses-permission android:name="android.permission.READ_CONTACTS" />
-  <uses-permission android:name="android.permission.WAKE_LOCK" />
-  <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature
+        android:name="android.hardware.Camera"
+        android:required="true" />
+    <uses-feature android:name="android.hardware.Camera.autofocus" />
+    <uses-feature android:name="android.hardware.Camera.flash" />
 
-  <!-- 录制音频 -->
-  <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <application
+        android:name=".SophixStubApplication"
+        android:allowBackup="true"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
 
-  <!-- <uses-permission android:name="com.andrewtse.aidlserver.AIDL_SERVICE" /> -->
+        <meta-data
+            android:name="com.taobao.android.hotfix.IDSECRET"
+            android:value="25219040" />
+        <meta-data
+            android:name="com.taobao.android.hotfix.APPSECRET"
+            android:value="665e87bdcf76bd65d138bebb90a3dc2d" />
+        <meta-data
+            android:name="com.taobao.android.hotfix.RSASECRET"
+            android:value="MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCwlfrTqu0940yDjTMSOTK60jk7RoHETzKSFbveWRiQYt/db5X9AWRx+YxXvsjq7ZIIFzWQuy+fxGELR/AldjX1QUCARCgx+ftDf++B6xMRNKc/PHH+yHjV/86jq3pcIUj0P+Oyy1jC464UpZv6lq+WNAY5r1B0WCN8pc2Jemh2LxK47VJrWpjlJ5WdA0CPhcQLx5WNiBRYOfZox1wA+m1oh8ICVpoqHq2WQpgDCSLsItIrQ/Fls/W9PBbGxVk47920Scog2IobUyi4KYJHhE/K2SfJ9HR0ZXYTww4hJ0MnW3OZOMs3vRShcx8ri7uDCb22QtwpS3jHG5ZbmmDwcsMBAgMBAAECggEBAIFDaLclekFBcDMkW2xNnosPdIGlnTx81QIHEt0yzz5ygnlwQ5VPPZ4JFOjuadk/SxTNGJL302batEczw+FIZTtBJtw+CEZ9Pactsb+iuvRvXLZ3ouLlET9l4HgDALEMVIEne6DYJgOT80x95m5LfAEx2BTF9tkT4/ZM0OaASpOnres6m69iMjoTHnArPmdbeqJGEayZJQtLd4PalR2vVjrE0HeOVQl0z1sBi4svV6viuQ7UoYbddOWdbxF9cbjAicLa7phmwo6s7oUnwhqTl5o2rvBCGLMzUZOWK+9KjHir8wQYO8Y8NGdL3ztN6S21UBR+EnNOZyKEQjDJ/ag7bxkCgYEA4fNnNX1veufp6qzbmvR0VJH4x3A+S+lxua/DU+W3ct996MS37kLOgPXdMnTYDxbzat9JXXlDni4YExJFGwS51AF5NX6AEN39TLzrtw7HfYW1yweOgVYZXcp/K4gLzbGgh1fd6sb22i0zx09NvaGcCZk7aTZWUoi+hblI8IEB+McCgYEAyBHs1JdwshFnlhv6RnfkcMIA0QZAsSHn4ynFBuugyjh3crKmTJQRo97r0DDNlZetgQ1CLWggk9IbyElg/NLQHP9dUjOkzD4CrrrSLUSCy1g9g61AJ0dCDEZdFdmb5G+nwb8ntrVw41Zqnf5NcV6Byk1thqSeByDmb9vUurFpbfcCgYBONCultNuP45LvuZJsqG1XFArSJIQ7S/ojtbTaZei/pqDynpu2qILG2dIMc6qQVnY7qDrBUoZXykZk2271sgYLXdMw866pp9vS4pSHEGN1i4DnW580HrO65apsS7MiJ3eTQJM7fk/UJc8FDeqvVq8mF1YbzUXFXTTsHbwkGdKv4wKBgHAgI6ONb/pL6MrmyR/fJ2bOQ1jh8TWUc/oKucJEIevTM5ZTawH15eD6GRynjUAuLm3p+VGrTr6pfSqFfVaT61ClCS79hHl2s1grmYkHIWpG/MqkORUKSYjJknehak3fCZx6vg4Wp7qw/rWnBM3pkkHHnP9dmLcUCDFeeV1b+mNHAoGBAKQCZsaUQOhopDbu1AumZiE3knzPmSeReGXHwMR722fdILkX/eEXtzAr6hPiFen+IyoiclTNMwgmfGZSxmk3KEUJ3yQrDvbCrdmc3G1wZYjvvNOZgzA9J5ZuCBkVSJory1jc4BhppHaMgAtf5+jET8q2+gPbn0wVxD3nYZQAiKbP" />
 
-  <permission
-    android:name="com.andrew.PROVIDER"
-    android:protectionLevel="normal" />
+        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.RcActivity" />
+        <activity android:name=".activity.TempActivity" />
+        <activity android:name=".bezier_view.water_wave.WaterWaveActivity" />
+        <activity android:name=".activity.BezierDemoActivity" />
+        <activity android:name=".LaunchActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-  <uses-permission android:name="com.andrew.PROVIDER" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".bezier_view.BezierActivity" />
+        <activity android:name=".activity.TimerActivity" />
+        <activity android:name=".activity.QRCodeActivity" />
+        <!-- 调整二维码扫描界面为竖屏 -->
+        <activity
+            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+            android:screenOrientation="fullSensor"
+            tools:replace="screenOrientation" />
+        <activity
+            android:name=".qrcode.CustomCaptureActivity"
+            android:screenOrientation="fullSensor" />
+        <activity android:name=".activity.JniActivity" />
+        <activity android:name=".activity.MemoryLeakActivity" />
+        <activity android:name=".activity.GsonDemoActivity" />
+        <activity android:name=".activity.SophixActivity" />
+        <activity android:name=".activity.CustomCanvasActivity" />
+        <activity android:name=".activity.InstallAndRemoveActivity" />
+        <!-- <receiver -->
+        <!-- android:name=".receiver.MyReceiver" android:enabled="true"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.PACKAGE_ADDED" /> -->
+        <!-- <action android:name="android.intent.action.PACKAGE_REPLACED" /> -->
+        <!-- <action android:name="android.intent.action.PACKAGE_REMOVED" /> -->
+        <!-- <data android:scheme="package" /> -->
+        <!-- <action android:name="android.net.conn.CONNECTIVITY_CHANGE" /> -->
+        <!-- </intent-filter> -->
+        <!-- </receiver> -->
+        <activity android:name=".activity.PendingIntentActivity" />
+        <activity android:name=".activity.ScreenShotActivity" />
+        <activity android:name=".activity.SwitchButtonActivity" />
+        <activity android:name=".activity.SwipeLayoutActivity" />
+        <activity android:name=".activity.DrawerLayoutAndToolBarActivity" />
+        <activity android:name=".activity.AppBarLayoutActivity" />
+        <activity android:name=".activity.TestActivity" />
+        <activity android:name=".activity.AIDLActivity" />
+        <activity android:name=".activity.ContentProviderActivity" />
 
-  <uses-feature
-    android:name="android.hardware.Camera"
-    android:required="true" />
-  <uses-feature android:name="android.hardware.Camera.autofocus" />
-  <uses-feature android:name="android.hardware.Camera.flash" />
+        <provider
+            android:name=".content_provider.MyContentProvider"
+            android:authorities="com.andrew.mycontentprovider"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="com.andrew.PROVIDER" />
 
-  <application
-    android:allowBackup="true"
-    android:hardwareAccelerated="true"
-    android:icon="@mipmap/ic_launcher"
-    android:label="@string/app_name"
-    android:name=".SophixStubApplication"
-    android:roundIcon="@mipmap/ic_launcher_round"
-    android:supportsRtl="true"
-    android:theme="@style/AppTheme">
-    <activity android:name=".bezier_view.water_wave.WaterWaveActivity" />
-    <activity android:name=".activity.BezierDemoActivity" />
+        <activity android:name=".activity.RetrofitActivity" />
+        <activity android:name=".activity.AnimationActivity" />
+        <activity android:name=".activity.ViewDragHelperActivity" />
+        <activity android:name=".activity.BottomNavActivity" />
+        <activity android:name=".tablayout_nav_fragment.TabLayoutNavActivity" />
+        <activity android:name=".bottom_nav_view_fragment.BottomNavViewActivity" />
+        <activity android:name=".activity.ViewMoveActivity" />
+        <activity android:name=".activity.ImageScaleActivity" />
+        <activity android:name=".activity.ImmersiveActivity" />
+        <activity android:name=".activity.AbilityActivity" />
+        <activity android:name=".activity.OpenCVActivity" />
+        <activity android:name=".activity.PCMActivity" />
+        <activity android:name=".activity.AudioActivity" />
+        <activity android:name=".activity.MediaPlayerActivity" />
+        <activity android:name=".activity.MediaRecorderActivity" />
+        <activity android:name=".activity.CameraActivity" />
+        <activity android:name=".activity.CameraDemoActivity" />
+        <activity android:name=".activity.Camera2Activity" />
+        <activity
+            android:name=".opencv.FaceDetectActivity"
+            android:configChanges="keyboardHidden|orientation" />
+        <activity android:name=".opencv.ImgProcessActivity" />
+        <activity android:name=".opencv.BankCardOCRActivity" />
+        <activity android:name=".activity.HookDemoActivity" />
 
-    <meta-data
-      android:name="com.taobao.android.hotfix.IDSECRET"
-      android:value="25219040" />
-    <meta-data
-      android:name="com.taobao.android.hotfix.APPSECRET"
-      android:value="665e87bdcf76bd65d138bebb90a3dc2d" />
-    <meta-data
-      android:name="com.taobao.android.hotfix.RSASECRET"
-      android:value="MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCwlfrTqu0940yDjTMSOTK60jk7RoHETzKSFbveWRiQYt/db5X9AWRx+YxXvsjq7ZIIFzWQuy+fxGELR/AldjX1QUCARCgx+ftDf++B6xMRNKc/PHH+yHjV/86jq3pcIUj0P+Oyy1jC464UpZv6lq+WNAY5r1B0WCN8pc2Jemh2LxK47VJrWpjlJ5WdA0CPhcQLx5WNiBRYOfZox1wA+m1oh8ICVpoqHq2WQpgDCSLsItIrQ/Fls/W9PBbGxVk47920Scog2IobUyi4KYJHhE/K2SfJ9HR0ZXYTww4hJ0MnW3OZOMs3vRShcx8ri7uDCb22QtwpS3jHG5ZbmmDwcsMBAgMBAAECggEBAIFDaLclekFBcDMkW2xNnosPdIGlnTx81QIHEt0yzz5ygnlwQ5VPPZ4JFOjuadk/SxTNGJL302batEczw+FIZTtBJtw+CEZ9Pactsb+iuvRvXLZ3ouLlET9l4HgDALEMVIEne6DYJgOT80x95m5LfAEx2BTF9tkT4/ZM0OaASpOnres6m69iMjoTHnArPmdbeqJGEayZJQtLd4PalR2vVjrE0HeOVQl0z1sBi4svV6viuQ7UoYbddOWdbxF9cbjAicLa7phmwo6s7oUnwhqTl5o2rvBCGLMzUZOWK+9KjHir8wQYO8Y8NGdL3ztN6S21UBR+EnNOZyKEQjDJ/ag7bxkCgYEA4fNnNX1veufp6qzbmvR0VJH4x3A+S+lxua/DU+W3ct996MS37kLOgPXdMnTYDxbzat9JXXlDni4YExJFGwS51AF5NX6AEN39TLzrtw7HfYW1yweOgVYZXcp/K4gLzbGgh1fd6sb22i0zx09NvaGcCZk7aTZWUoi+hblI8IEB+McCgYEAyBHs1JdwshFnlhv6RnfkcMIA0QZAsSHn4ynFBuugyjh3crKmTJQRo97r0DDNlZetgQ1CLWggk9IbyElg/NLQHP9dUjOkzD4CrrrSLUSCy1g9g61AJ0dCDEZdFdmb5G+nwb8ntrVw41Zqnf5NcV6Byk1thqSeByDmb9vUurFpbfcCgYBONCultNuP45LvuZJsqG1XFArSJIQ7S/ojtbTaZei/pqDynpu2qILG2dIMc6qQVnY7qDrBUoZXykZk2271sgYLXdMw866pp9vS4pSHEGN1i4DnW580HrO65apsS7MiJ3eTQJM7fk/UJc8FDeqvVq8mF1YbzUXFXTTsHbwkGdKv4wKBgHAgI6ONb/pL6MrmyR/fJ2bOQ1jh8TWUc/oKucJEIevTM5ZTawH15eD6GRynjUAuLm3p+VGrTr6pfSqFfVaT61ClCS79hHl2s1grmYkHIWpG/MqkORUKSYjJknehak3fCZx6vg4Wp7qw/rWnBM3pkkHHnP9dmLcUCDFeeV1b+mNHAoGBAKQCZsaUQOhopDbu1AumZiE3knzPmSeReGXHwMR722fdILkX/eEXtzAr6hPiFen+IyoiclTNMwgmfGZSxmk3KEUJ3yQrDvbCrdmc3G1wZYjvvNOZgzA9J5ZuCBkVSJory1jc4BhppHaMgAtf5+jET8q2+gPbn0wVxD3nYZQAiKbP" />
-
-    <activity android:name=".activity.MainActivity" />
-    <activity android:name=".activity.RcActivity" />
-    <activity android:name=".activity.TempActivity" />
-    <activity android:name=".LaunchActivity">
-      <intent-filter>
-        <action android:name="android.intent.action.MAIN" />
-
-        <category android:name="android.intent.category.LAUNCHER" />
-      </intent-filter>
-    </activity>
-    <activity android:name=".bezier_view.BezierActivity" />
-    <activity android:name=".activity.TimerActivity" />
-    <activity android:name=".activity.QRCodeActivity" />
-    <!-- 调整二维码扫描界面为竖屏 -->
-    <activity
-      android:name="com.journeyapps.barcodescanner.CaptureActivity"
-      android:screenOrientation="fullSensor"
-      tools:replace="screenOrientation" />
-    <activity
-      android:name=".qrcode.CustomCaptureActivity"
-      android:screenOrientation="fullSensor" />
-    <activity android:name=".activity.JniActivity" />
-    <activity android:name=".activity.MemoryLeakActivity" />
-    <activity android:name=".activity.GsonDemoActivity" />
-    <activity android:name=".activity.SophixActivity" />
-    <activity android:name=".activity.CustomCanvasActivity" />
-    <activity android:name=".activity.InstallAndRemoveActivity" />
-    <!-- <receiver -->
-    <!-- android:name=".receiver.MyReceiver" android:enabled="true"> -->
-    <!-- <intent-filter> -->
-    <!-- <action android:name="android.intent.action.PACKAGE_ADDED" /> -->
-    <!-- <action android:name="android.intent.action.PACKAGE_REPLACED" /> -->
-    <!-- <action android:name="android.intent.action.PACKAGE_REMOVED" /> -->
-    <!-- <data android:scheme="package" /> -->
-    <!-- <action android:name="android.net.conn.CONNECTIVITY_CHANGE" /> -->
-    <!-- </intent-filter> -->
-    <!-- </receiver> -->
-    <activity android:name=".activity.PendingIntentActivity" />
-    <activity android:name=".activity.ScreenShotActivity" />
-    <activity android:name=".activity.SwitchButtonActivity" />
-    <activity android:name=".activity.SwipeLayoutActivity" />
-    <activity android:name=".activity.DrawerLayoutAndToolBarActivity" />
-    <activity android:name=".activity.AppBarLayoutActivity" />
-    <activity android:name=".activity.TestActivity" />
-    <activity android:name=".activity.AIDLActivity" />
-    <activity android:name=".activity.ContentProviderActivity" />
-
-    <provider
-      android:authorities="com.andrew.mycontentprovider"
-      android:enabled="true"
-      android:exported="true"
-      android:name=".content_provider.MyContentProvider"
-      android:permission="com.andrew.PROVIDER" />
-
-    <activity android:name=".activity.RetrofitActivity" />
-    <activity android:name=".activity.AnimationActivity" />
-    <activity android:name=".activity.ViewDragHelperActivity" />
-    <activity android:name=".activity.BottomNavActivity" />
-    <activity android:name=".tablayout_nav_fragment.TabLayoutNavActivity" />
-    <activity android:name=".bottom_nav_view_fragment.BottomNavViewActivity" />
-    <activity android:name=".activity.ViewMoveActivity" />
-    <activity android:name=".activity.ImageScaleActivity" />
-    <activity android:name=".activity.ImmersiveActivity" />
-    <activity android:name=".activity.AbilityActivity" />
-    <activity android:name=".activity.OpenCVActivity" />
-    <activity android:name=".activity.PCMActivity" />
-    <activity android:name=".activity.AudioActivity" />
-    <activity android:name=".activity.MediaPlayerActivity" />
-    <activity android:name=".activity.MediaRecorderActivity" />
-    <activity android:name=".activity.CameraActivity" />
-    <activity android:name=".activity.CameraDemoActivity" />
-    <activity android:name=".activity.Camera2Activity" />
-    <activity
-      android:configChanges="keyboardHidden|orientation"
-      android:name=".opencv.FaceDetectActivity" />
-    <activity android:name=".opencv.ImgProcessActivity" />
-    <activity android:name=".opencv.BankCardOCRActivity" />
-
-    <provider
-      android:authorities="${applicationId}.provider"
-      android:exported="false"
-      android:grantUriPermissions="true"
-      android:name="androidx.core.content.FileProvider">
-      <meta-data
-        android:name="android.support.FILE_PROVIDER_PATHS"
-        android:resource="@xml/file_paths" />
-    </provider>
-  </application>
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+    </application>
 
 </manifest>

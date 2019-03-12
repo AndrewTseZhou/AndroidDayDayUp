@@ -5,9 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
+
 import com.andrewtse.testdemo.activity.AIDLActivity;
 import com.andrewtse.testdemo.activity.AbilityActivity;
 import com.andrewtse.testdemo.activity.AnimationActivity;
@@ -20,6 +18,7 @@ import com.andrewtse.testdemo.activity.ContentProviderActivity;
 import com.andrewtse.testdemo.activity.CustomCanvasActivity;
 import com.andrewtse.testdemo.activity.DrawerLayoutAndToolBarActivity;
 import com.andrewtse.testdemo.activity.GsonDemoActivity;
+import com.andrewtse.testdemo.activity.HookDemoActivity;
 import com.andrewtse.testdemo.activity.ImageScaleActivity;
 import com.andrewtse.testdemo.activity.ImmersiveActivity;
 import com.andrewtse.testdemo.activity.InstallAndRemoveActivity;
@@ -39,6 +38,10 @@ import com.andrewtse.testdemo.activity.TimerActivity;
 import com.andrewtse.testdemo.activity.ViewDragHelperActivity;
 import com.andrewtse.testdemo.activity.ViewMoveActivity;
 import com.andrewtse.testdemo.aop.CheckPermission;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class LaunchActivity extends AppCompatActivity implements OnClickListener {
 
@@ -91,6 +94,7 @@ public class LaunchActivity extends AppCompatActivity implements OnClickListener
         findViewById(R.id.btn_opencv_activity_click).setOnClickListener(this);
         findViewById(R.id.btn_audio_activity_click).setOnClickListener(this);
         findViewById(R.id.btn_camera_activity_click).setOnClickListener(this);
+        findViewById(R.id.btn_hook_activity_click).setOnClickListener(this);
 
 //        findViewById(R.id.fab).setOnClickListener(new OnClickListener() {
 //            @Override
@@ -235,6 +239,9 @@ public class LaunchActivity extends AppCompatActivity implements OnClickListener
                 break;
             case R.id.btn_camera_activity_click:
                 intent = new Intent(this, CameraDemoActivity.class);
+                break;
+            case R.id.btn_hook_activity_click:
+                intent = new Intent(this, HookDemoActivity.class);
                 break;
         }
         startActivity(intent);

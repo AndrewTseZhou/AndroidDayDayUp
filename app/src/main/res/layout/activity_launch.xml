@@ -240,6 +240,13 @@
         android:layout_height="wrap_content"
         android:text="相机 Activity"
         android:textAllCaps="false" />
+
+      <Button
+          android:id="@+id/btn_hook_activity_click"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Hook Activity"
+          android:textAllCaps="false" />
     </LinearLayout>
   </ScrollView>
 
