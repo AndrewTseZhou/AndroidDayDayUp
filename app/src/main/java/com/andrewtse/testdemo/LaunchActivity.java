@@ -16,6 +16,7 @@ import com.andrewtse.testdemo.activity.BottomNavActivity;
 import com.andrewtse.testdemo.activity.CameraDemoActivity;
 import com.andrewtse.testdemo.activity.ContentProviderActivity;
 import com.andrewtse.testdemo.activity.CustomCanvasActivity;
+import com.andrewtse.testdemo.activity.DatePickerActivity;
 import com.andrewtse.testdemo.activity.DrawerLayoutAndToolBarActivity;
 import com.andrewtse.testdemo.activity.GsonDemoActivity;
 import com.andrewtse.testdemo.activity.HookDemoActivity;
@@ -95,6 +96,7 @@ public class LaunchActivity extends AppCompatActivity implements OnClickListener
         findViewById(R.id.btn_audio_activity_click).setOnClickListener(this);
         findViewById(R.id.btn_camera_activity_click).setOnClickListener(this);
         findViewById(R.id.btn_hook_activity_click).setOnClickListener(this);
+        findViewById(R.id.btn_date_picker_activity_click).setOnClickListener(this);
 
 //        findViewById(R.id.fab).setOnClickListener(new OnClickListener() {
 //            @Override
@@ -242,6 +244,9 @@ public class LaunchActivity extends AppCompatActivity implements OnClickListener
                 break;
             case R.id.btn_hook_activity_click:
                 intent = new Intent(this, HookDemoActivity.class);
+                break;
+            case R.id.btn_date_picker_activity_click:
+                intent = new Intent(this, DatePickerActivity.class);
                 break;
         }
         startActivity(intent);

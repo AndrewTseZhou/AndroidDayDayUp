@@ -39,4 +39,14 @@
         我们要告诉我们的后代，告诉天下所有的热血中华儿郎，请你们永远记住往昔那苦难的岁月，记住那些昔日的英雄。中国英雄纪念碑上铭刻着他们的丰功伟绩。他们的精神永远在我们的心中！！！
         当他下命令把战友的尸体堆积起来当护盾的时候，当他发表那样的激动人心的演讲的时候：“小日本要想通过我们的阵地，只有踩着我们的尸体！而我们就是死，也要多拉几个小日本垫背！阵亡的弟兄如果要怪就怪我周卫国！我周卫国发誓，如果我阵亡了，到阎王老子那里我会亲自给弟兄们赔罪！如果能够活下来，我周卫国一定倾家荡产厚葬阵亡的弟兄！”我被震撼了，我再次地流泪。 原文不是这样 说这一段话的是 陈正伦
     </string>
+
+    <!--日期选择器-->
+    <string name="strDateSelect">日期选择</string>
+    <string name="strDateYear">年</string>
+    <string name="strDateMonth">月</string>
+    <string name="strDateDay">日</string>
+    <string name="strDateConfirm">确定</string>
+    <string name="strDateCancel">取消</string>
+    <string name="strDateHour">时</string>
+    <string name="strDateMinute">分</string>
 </resources>
