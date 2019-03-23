@@ -1,13 +1,16 @@
 package com.andrewtse.testdemo.activity;
 
+import android.app.ActivityManager;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.andrewtse.testdemo.LaunchActivity;
 import com.andrewtse.testdemo.R;
 
 import java.lang.reflect.Field;
@@ -42,6 +45,11 @@ public class HookDemoActivity extends AppCompatActivity {
         });
 
         hookOnClickListener(mBtnHookClick);
+        try {
+            hookNotification(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void hookOnClickListener(View view) {
@@ -112,5 +120,66 @@ public class HookDemoActivity extends AppCompatActivity {
         Field sServiceField = NotificationManager.class.getDeclaredField("sService");
         sServiceField.setAccessible(true);
         sServiceField.set(notificationManager, proxyNotiMng);
+    }
+
+    public static void hookAMSAfter26() {
+        try {
+            //获取 IActivityManagerSingleton
+            Field declaredField = ActivityManager.class.getDeclaredField("IActivityManagerSingleton");
+            declaredField.setAccessible(true);
+            Object value = declaredField.get(null);
+
+            Class<?> singletonClz = Class.forName("android.util.Singleton");
+            Field instanceField = singletonClz.getDeclaredField("mInstance");
+            instanceField.setAccessible(true);
+            Object iActivityManagerObject = instanceField.get(value);
+
+            //获取代理对象
+            Class<?> iActivity = Class.forName("android.app.IActivityManager");
+            Object proxy = Proxy.newProxyInstance(Thread.currentThread().getContextClassLoader(), new Class<?>[]{iActivity}, new InvocationHandler() {
+                @Override
+                public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                    method.invoke(iActivityManagerObject, args);
+                    System.out.println("hhh 就不让你跳");
+                    return null;
+                }
+            });
+
+            //将proxy替换原来的对象
+            instanceField.set(value, proxy);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void hookAMSBefore26() {
+        try {
+            //获取 IActivityManagerSingleton
+            Class<?> forName = Class.forName("android.app.ActivityManagerNative");
+            Field defaultField = forName.getDeclaredField("gDefault");
+            defaultField.setAccessible(true);
+            Object value = defaultField.get(null);
+
+            Class<?> singletonClz = Class.forName("android.util.Singleton");
+            Field instanceField = singletonClz.getDeclaredField("mInstance");
+            instanceField.setAccessible(true);
+            Object iActivityManagerObject = instanceField.get(value);
+
+            //获取代理对象
+            Class<?> iActivity = Class.forName("android.app.IActivityManager");
+            Object proxy = Proxy.newProxyInstance(Thread.currentThread().getContextClassLoader(), new Class<?>[]{iActivity}, new InvocationHandler() {
+                @Override
+                public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                    method.invoke(iActivityManagerObject, args);
+                    System.out.println("hhh 就不让你跳");
+                    return null;
+                }
+            });
+
+            //将proxy替换原来的对象
+            instanceField.set(value, proxy);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
