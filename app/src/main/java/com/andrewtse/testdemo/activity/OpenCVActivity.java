@@ -6,15 +6,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.andrewtse.testdemo.R;
+import com.andrewtse.testdemo.opencv.BankCardOCRActivity;
+import com.andrewtse.testdemo.opencv.FaceDetectActivity;
+import com.andrewtse.testdemo.opencv.IDCardOCRActivity;
+import com.andrewtse.testdemo.opencv.ImgProcessActivity;
+
+import org.opencv.android.OpenCVLoader;
+
 import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import com.andrewtse.testdemo.R;
-import com.andrewtse.testdemo.opencv.BankCardOCRActivity;
-import com.andrewtse.testdemo.opencv.FaceDetectActivity;
-import com.andrewtse.testdemo.opencv.ImgProcessActivity;
-import org.opencv.android.OpenCVLoader;
 
 public class OpenCVActivity extends AppCompatActivity {
 
@@ -25,6 +29,8 @@ public class OpenCVActivity extends AppCompatActivity {
     Button mBtnFaceDetect;
     @BindView(R.id.btn_bankcard_ocr)
     Button mBtnBankCardOCR;
+    @BindView(R.id.btn_id_card_ocr)
+    Button mBtnIdCardOcr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +65,7 @@ public class OpenCVActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    @OnClick({R.id.btn_hello, R.id.btn_faceDetect, R.id.btn_bankcard_ocr})
+    @OnClick({R.id.btn_hello, R.id.btn_faceDetect, R.id.btn_bankcard_ocr, R.id.btn_id_card_ocr})
     public void onViewClick(View view) {
         int vId = view.getId();
         switch (vId) {
@@ -74,6 +80,10 @@ public class OpenCVActivity extends AppCompatActivity {
             case R.id.btn_bankcard_ocr:
                 Intent intentBankCard = new Intent(this, BankCardOCRActivity.class);
                 startActivity(intentBankCard);
+                break;
+            case R.id.btn_id_card_ocr:
+                Intent idCard = new Intent(this, IDCardOCRActivity.class);
+                startActivity(idCard);
                 break;
         }
     }

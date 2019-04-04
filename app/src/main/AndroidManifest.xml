@@ -134,6 +134,7 @@
         <activity android:name=".opencv.BankCardOCRActivity" />
         <activity android:name=".activity.HookDemoActivity" />
         <activity android:name=".activity.DatePickerActivity" />
+        <activity android:name=".opencv.IDCardOCRActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
