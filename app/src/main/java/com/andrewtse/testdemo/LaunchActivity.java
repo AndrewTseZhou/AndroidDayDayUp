@@ -32,6 +32,7 @@ import com.andrewtse.testdemo.activity.RcActivity;
 import com.andrewtse.testdemo.activity.RetrofitActivity;
 import com.andrewtse.testdemo.activity.ScreenShotActivity;
 import com.andrewtse.testdemo.activity.SophixActivity;
+import com.andrewtse.testdemo.activity.SuspensionWindowActivity;
 import com.andrewtse.testdemo.activity.SwipeLayoutActivity;
 import com.andrewtse.testdemo.activity.SwitchButtonActivity;
 import com.andrewtse.testdemo.activity.TempActivity;
@@ -97,6 +98,7 @@ public class LaunchActivity extends AppCompatActivity implements OnClickListener
         findViewById(R.id.btn_camera_activity_click).setOnClickListener(this);
         findViewById(R.id.btn_hook_activity_click).setOnClickListener(this);
         findViewById(R.id.btn_date_picker_activity_click).setOnClickListener(this);
+        findViewById(R.id.btn_suspension_window_activity_click).setOnClickListener(this);
 
 //        findViewById(R.id.fab).setOnClickListener(new OnClickListener() {
 //            @Override
@@ -247,6 +249,9 @@ public class LaunchActivity extends AppCompatActivity implements OnClickListener
                 break;
             case R.id.btn_date_picker_activity_click:
                 intent = new Intent(this, DatePickerActivity.class);
+                break;
+            case R.id.btn_suspension_window_activity_click:
+                intent = new Intent(this, SuspensionWindowActivity.class);
                 break;
         }
         startActivity(intent);

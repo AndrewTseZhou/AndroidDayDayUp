@@ -254,6 +254,13 @@
           android:layout_height="wrap_content"
           android:text="日期选择器 Activity"
           android:textAllCaps="false" />
+
+      <Button
+          android:id="@+id/btn_suspension_window_activity_click"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="悬浮窗Activity"
+          android:textAllCaps="false" />
     </LinearLayout>
   </ScrollView>
 

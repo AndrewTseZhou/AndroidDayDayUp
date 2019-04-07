@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <color name="colorPrimary">#3F51B5</color>
-  <color name="colorPrimaryDark">#303F9F</color>
-  <color name="colorAccent">#FF4081</color>
-  <color name="colorPressedColor">#A97661</color>
-  <color name="colorCheckedColor">#48B7FD</color>
-  <color name="colorPressedCheckedColor">#3993cc</color>
-  <color name="red">#FF3B00</color>
-  <color name="red_press">#990000</color>
-  <color name="toolbar_bg">#0176da</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorPressedColor">#A97661</color>
+    <color name="colorCheckedColor">#48B7FD</color>
+    <color name="colorPressedCheckedColor">#3993cc</color>
+    <color name="red">#FF3B00</color>
+    <color name="red_press">#990000</color>
+    <color name="toolbar_bg">#0176da</color>
+
+    <color name="bg_button_touch">#ffffff</color>
+    <color name="bg_button_normal">#505050</color>
+    <color name="color_main">#32e8fe</color>
+    <color name="border_bar">#555f7f</color>
+    <color name="bg">#f6f7ff</color>
 </resources>
