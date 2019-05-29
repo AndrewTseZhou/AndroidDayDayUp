@@ -18,6 +18,7 @@ import com.andrewtse.testdemo.activity.ContentProviderActivity;
 import com.andrewtse.testdemo.activity.CustomCanvasActivity;
 import com.andrewtse.testdemo.activity.DatePickerActivity;
 import com.andrewtse.testdemo.activity.DrawerLayoutAndToolBarActivity;
+import com.andrewtse.testdemo.activity.FlutterDemoActivity;
 import com.andrewtse.testdemo.activity.GsonDemoActivity;
 import com.andrewtse.testdemo.activity.HookDemoActivity;
 import com.andrewtse.testdemo.activity.ImageScaleActivity;
@@ -99,6 +100,7 @@ public class LaunchActivity extends AppCompatActivity implements OnClickListener
         findViewById(R.id.btn_hook_activity_click).setOnClickListener(this);
         findViewById(R.id.btn_date_picker_activity_click).setOnClickListener(this);
         findViewById(R.id.btn_suspension_window_activity_click).setOnClickListener(this);
+        findViewById(R.id.btn_flutter_activity_click).setOnClickListener(this);
 
 //        findViewById(R.id.fab).setOnClickListener(new OnClickListener() {
 //            @Override
@@ -252,6 +254,9 @@ public class LaunchActivity extends AppCompatActivity implements OnClickListener
                 break;
             case R.id.btn_suspension_window_activity_click:
                 intent = new Intent(this, SuspensionWindowActivity.class);
+                break;
+            case R.id.btn_flutter_activity_click:
+                intent = new Intent(this, FlutterDemoActivity.class);
                 break;
         }
         startActivity(intent);

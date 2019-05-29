@@ -144,6 +144,7 @@
         <activity android:name=".activity.DatePickerActivity" />
         <activity android:name=".opencv.IDCardOCRActivity" />
         <activity android:name=".activity.SuspensionWindowActivity" />
+        <activity android:name=".activity.FlutterDemoActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

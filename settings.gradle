@@ -1,2 +1,8 @@
 include ':app', ':aidlserver'
 include ':openCVLibrary345'
+
+setBinding(new Binding([gradle: this]))
+evaluate(new File(
+        settingsDir.parentFile,
+        'CustomView/flutter_demo/.android/include_flutter.groovy'
+))
