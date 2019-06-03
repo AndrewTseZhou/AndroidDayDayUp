@@ -38,6 +38,7 @@ import com.andrewtse.testdemo.activity.SuspensionWindowActivity;
 import com.andrewtse.testdemo.activity.SwipeLayoutActivity;
 import com.andrewtse.testdemo.activity.SwitchButtonActivity;
 import com.andrewtse.testdemo.activity.TempActivity;
+import com.andrewtse.testdemo.activity.TimeAxleActivity;
 import com.andrewtse.testdemo.activity.TimerActivity;
 import com.andrewtse.testdemo.activity.ViewDragHelperActivity;
 import com.andrewtse.testdemo.activity.ViewMoveActivity;
@@ -103,6 +104,7 @@ public class LaunchActivity extends AppCompatActivity implements OnClickListener
         findViewById(R.id.btn_suspension_window_activity_click).setOnClickListener(this);
         findViewById(R.id.btn_flutter_activity_click).setOnClickListener(this);
         findViewById(R.id.btn_lottie_activity_click).setOnClickListener(this);
+        findViewById(R.id.btn_time_axle_activity_click).setOnClickListener(this);
 
 //        findViewById(R.id.fab).setOnClickListener(new OnClickListener() {
 //            @Override
@@ -262,6 +264,9 @@ public class LaunchActivity extends AppCompatActivity implements OnClickListener
                 break;
             case R.id.btn_lottie_activity_click:
                 intent = new Intent(this, LottieActivity.class);
+                break;
+            case R.id.btn_time_axle_activity_click:
+                intent = new Intent(this, TimeAxleActivity.class);
                 break;
         }
         startActivity(intent);
