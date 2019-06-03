@@ -25,6 +25,7 @@ import com.andrewtse.testdemo.activity.ImageScaleActivity;
 import com.andrewtse.testdemo.activity.ImmersiveActivity;
 import com.andrewtse.testdemo.activity.InstallAndRemoveActivity;
 import com.andrewtse.testdemo.activity.JniActivity;
+import com.andrewtse.testdemo.activity.LottieActivity;
 import com.andrewtse.testdemo.activity.MemoryLeakActivity;
 import com.andrewtse.testdemo.activity.OpenCVActivity;
 import com.andrewtse.testdemo.activity.PendingIntentActivity;
@@ -101,6 +102,7 @@ public class LaunchActivity extends AppCompatActivity implements OnClickListener
         findViewById(R.id.btn_date_picker_activity_click).setOnClickListener(this);
         findViewById(R.id.btn_suspension_window_activity_click).setOnClickListener(this);
         findViewById(R.id.btn_flutter_activity_click).setOnClickListener(this);
+        findViewById(R.id.btn_lottie_activity_click).setOnClickListener(this);
 
 //        findViewById(R.id.fab).setOnClickListener(new OnClickListener() {
 //            @Override
@@ -257,6 +259,9 @@ public class LaunchActivity extends AppCompatActivity implements OnClickListener
                 break;
             case R.id.btn_flutter_activity_click:
                 intent = new Intent(this, FlutterDemoActivity.class);
+                break;
+            case R.id.btn_lottie_activity_click:
+                intent = new Intent(this, LottieActivity.class);
                 break;
         }
         startActivity(intent);

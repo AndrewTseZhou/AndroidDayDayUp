@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
 //阿里云需要使用，由于日均设备免费次数20次，需要的时候再打开
 //apply plugin: 'com.aliyun.ams.emas-services'
 apply plugin: 'android-aspectjx'
@@ -86,4 +88,10 @@ dependencies {
     implementation project(':openCVLibrary345')
     implementation 'com.rmtheis:tess-two:9.0.0'
     implementation project(':flutter')
+    implementation 'com.airbnb.android:lottie:3.0.3'
+    compile "androidx.core:core-ktx:1.0.2"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }

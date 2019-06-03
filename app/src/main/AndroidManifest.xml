@@ -145,6 +145,7 @@
         <activity android:name=".opencv.IDCardOCRActivity" />
         <activity android:name=".activity.SuspensionWindowActivity" />
         <activity android:name=".activity.FlutterDemoActivity" />
+        <activity android:name=".activity.LottieActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -159,6 +160,7 @@
         <receiver android:name=".suspension_window.DeviceBootReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
+
                 <category android:name="android.intent.category.HOME" />
             </intent-filter>
         </receiver>
@@ -172,6 +174,7 @@
             <intent-filter>
                 <action android:name="android.accessibilityservice.AccessibilityService" />
             </intent-filter>
+
             <meta-data
                 android:name="android.accessibilityservice"
                 android:resource="@xml/auto_reply_service_config" />
