@@ -42,3 +42,4 @@ build/
 test/
 .ios/
 .flutter-plugins
+/local.properties

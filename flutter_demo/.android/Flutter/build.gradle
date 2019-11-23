@@ -26,6 +26,9 @@ if (flutterVersionName == null) {
 apply plugin: 'com.android.library'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
+group 'com.example.flutter_demo'
+version '1.0'
+
 android {
     compileSdkVersion 28
 
@@ -44,6 +47,5 @@ flutter {
 
 dependencies {
     testImplementation 'junit:junit:4.12'
-    implementation 'androidx.legacy:legacy-support-v13:1.0.0'
-    implementation 'androidx.annotation:annotation:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.0.2'
 }

@@ -89,7 +89,7 @@ dependencies {
     implementation 'com.rmtheis:tess-two:9.0.0'
     implementation project(':flutter')
     implementation 'com.airbnb.android:lottie:3.0.3'
-    implementation "androidx.core:core-ktx:1.0.2"
+    implementation 'androidx.core:core-ktx:1.1.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 repositories {
