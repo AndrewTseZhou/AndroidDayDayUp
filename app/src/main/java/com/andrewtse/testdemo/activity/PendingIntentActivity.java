@@ -1,29 +1,35 @@
 package com.andrewtse.testdemo.activity;
 
 import android.app.Notification;
-import android.app.Notification.Builder;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.RemoteViews;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.andrewtse.testdemo.LaunchActivity;
 import com.andrewtse.testdemo.R;
 
 public class PendingIntentActivity extends AppCompatActivity {
 
+    private static final String CHANNEL_ID = "channelId";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pending_intent);
+        createNotificationChannel(this);
 
         findViewById(R.id.btn_send_system_notification).setOnClickListener(new OnClickListener() {
             @Override
@@ -85,13 +91,13 @@ public class PendingIntentActivity extends AppCompatActivity {
 //        pi = PendingIntent.getActivity(this, count, intent, PendingIntent.FLAG_ONE_SHOT, bundle);//API 16以上
 //        pi = PendingIntent.getService(this, 102, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
-        Notification.Builder builder = new Notification.Builder(this)
-            .setSmallIcon(R.mipmap.ic_launcher)
-            .setContentIntent(pi)
-            .setContentText("通知内容" + count)
-            .setContentTitle("通知标题" + count)
-            .setTicker("this is msg's hint count--->" + count)
-            .setNumber(count);
+        Notification.Builder builder = new Notification.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentIntent(pi)
+                .setContentText("通知内容" + count)
+                .setContentTitle("通知标题" + count)
+                .setTicker("this is msg's hint count--->" + count)
+                .setNumber(count);
         Notification notification = builder.build();//这个需要在API 16以上才可以用,这里向下兼容到API 14(4.0)
         count++;
         notification.flags |= Notification.FLAG_AUTO_CANCEL;//这里指定这个通知点击之后或者可以被清除按钮清除。 FLAG_NO_CLEAR 通知不能取消
@@ -110,9 +116,9 @@ public class PendingIntentActivity extends AppCompatActivity {
 //        remoteViews.setImageViewResource(, );
 //        remoteViews.setOnClickPendingIntent(, pi);
 
-        Notification.Builder builder = new Notification.Builder(this)
-            .setCustomContentView(remoteViews)
-            .setContentIntent(pi);
+        Notification.Builder builder = new Notification.Builder(this, CHANNEL_ID)
+                .setCustomContentView(remoteViews)
+                .setContentIntent(pi);
         Notification notification = builder.build();//这个需要在API 16以上才可以用,这里向下兼容到API 14(4.0)
         nm.notify(102, notification);
     }
@@ -124,11 +130,11 @@ public class PendingIntentActivity extends AppCompatActivity {
 
         RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.layout_notification_fold);
 
-        Notification.Builder builder = new Builder(this)
-            .setContentIntent(pi)
-            .setSmallIcon(R.mipmap.ic_launcher)
-            .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
-            .setContentTitle("折叠式通知");
+        Notification.Builder builder = new Notification.Builder(this, CHANNEL_ID)
+                .setContentIntent(pi)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
+                .setContentTitle("折叠式通知");
 //               .setCustomBigContentView(remoteViews);//require API21
         Notification notification = builder.build();
         notification.bigContentView = remoteViews;
@@ -140,14 +146,28 @@ public class PendingIntentActivity extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.baidu.com"));
         PendingIntent pi = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
-        Notification.Builder builder = new Builder(this)
-            .setContentIntent(pi)
-            .setSmallIcon(R.mipmap.ic_launcher)
-            .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
-            .setContentTitle("悬挂式通知")
-            .setFullScreenIntent(pi, true)
-            .setAutoCancel(true);
+        Notification.Builder builder = new Notification.Builder(this, CHANNEL_ID)
+                .setContentIntent(pi)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
+                .setContentTitle("悬挂式通知")
+                .setFullScreenIntent(pi, true)
+                .setAutoCancel(true);
         Notification notification = builder.build();
         nm.notify(2, notification);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void createNotificationChannel(Context context) {
+        NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        if (nm == null) {
+            throw new IllegalStateException("Fail to get NotificationManager when create notification channel.");
+        }
+        NotificationChannel channel = nm.getNotificationChannel(CHANNEL_ID);
+        if (channel != null) {
+            return;
+        }
+        channel = new NotificationChannel(CHANNEL_ID, "通知栏消息", NotificationManager.IMPORTANCE_HIGH);
+        nm.createNotificationChannel(channel);
     }
 }
