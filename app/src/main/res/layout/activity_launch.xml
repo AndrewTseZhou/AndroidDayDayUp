@@ -263,13 +263,6 @@
           android:textAllCaps="false" />
 
       <Button
-          android:id="@+id/btn_flutter_activity_click"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="Flutter Activity"
-          android:textAllCaps="false" />
-
-      <Button
           android:id="@+id/btn_lottie_activity_click"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"

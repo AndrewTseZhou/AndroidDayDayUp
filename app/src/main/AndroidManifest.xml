@@ -143,7 +143,6 @@
         <activity android:name=".activity.DatePickerActivity" />
         <activity android:name=".opencv.IDCardOCRActivity" />
         <activity android:name=".activity.SuspensionWindowActivity" />
-        <activity android:name=".activity.FlutterDemoActivity" />
         <activity android:name=".activity.LottieActivity" />
         <activity android:name=".activity.TimeAxleActivity" />
         <activity android:name=".activity.NestedScrollingActivity" />
