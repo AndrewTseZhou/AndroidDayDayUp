@@ -77,7 +77,7 @@ public class FaceDetectActivity extends AppCompatActivity implements CameraBridg
                         } else {
                             Log.d(TAG, "Loaded cascade classifier from " + mCascadeFile.getAbsolutePath());
                         }
-                        mNativeDetector = new DetectionBasedTracker(mCascadeFile.getAbsolutePath(), "", 0);
+                        mNativeDetector = new DetectionBasedTracker(mCascadeFile.getAbsolutePath(), 0);
                         cascadeDir.delete();
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();

@@ -70,7 +70,7 @@ class CV_EXPORTS Image2D;
 class CV_EXPORTS_W_SIMPLE Device
 {
 public:
-    CV_WRAP Device();
+    CV_WRAP Device() CV_NOEXCEPT;
     explicit Device(void* d);
     Device(const Device& d);
     Device& operator = (const Device& d);
@@ -238,7 +238,7 @@ protected:
 class CV_EXPORTS Context
 {
 public:
-    Context();
+    Context() CV_NOEXCEPT;
     explicit Context(int dtype);
     ~Context();
     Context(const Context& c);
@@ -269,7 +269,7 @@ public:
 class CV_EXPORTS Platform
 {
 public:
-    Platform();
+    Platform() CV_NOEXCEPT;
     ~Platform();
     Platform(const Platform& p);
     Platform& operator = (const Platform& p);
@@ -324,7 +324,7 @@ void initializeContextFromHandle(Context& ctx, void* platform, void* context, vo
 class CV_EXPORTS Queue
 {
 public:
-    Queue();
+    Queue() CV_NOEXCEPT;
     explicit Queue(const Context& c, const Device& d=Device());
     ~Queue();
     Queue(const Queue& q);
@@ -350,7 +350,7 @@ class CV_EXPORTS KernelArg
 public:
     enum { LOCAL=1, READ_ONLY=2, WRITE_ONLY=4, READ_WRITE=6, CONSTANT=8, PTR_ONLY = 16, NO_SIZE=256 };
     KernelArg(int _flags, UMat* _m, int wscale=1, int iwscale=1, const void* _obj=0, size_t _sz=0);
-    KernelArg();
+    KernelArg() CV_NOEXCEPT;
 
     static KernelArg Local(size_t localMemSize)
     { return KernelArg(LOCAL, 0, 1, 1, 0, localMemSize); }
@@ -387,7 +387,7 @@ public:
 class CV_EXPORTS Kernel
 {
 public:
-    Kernel();
+    Kernel() CV_NOEXCEPT;
     Kernel(const char* kname, const Program& prog);
     Kernel(const char* kname, const ProgramSource& prog,
            const String& buildopts = String(), String* errmsg=0);
@@ -562,7 +562,9 @@ public:
         i = set(i, a6); i = set(i, a7); i = set(i, a8); i = set(i, a9); i = set(i, a10); i = set(i, a11);
         i = set(i, a12); i = set(i, a13); i = set(i, a14); set(i, a15); return *this;
     }
-    /** @brief Run the OpenCL kernel.
+
+    /** @brief Run the OpenCL kernel (globalsize value may be adjusted)
+
     @param dims the work problem dimensions. It is the length of globalsize and localsize. It can be either 1, 2 or 3.
     @param globalsize work items for each dimension. It is not the final globalsize passed to
       OpenCL. Each dimension will be adjusted to the nearest integer divisible by the corresponding
@@ -571,12 +573,26 @@ public:
     @param localsize work-group size for each dimension.
     @param sync specify whether to wait for OpenCL computation to finish before return.
     @param q command queue
+
+    @note Use run_() if your kernel code doesn't support adjusted globalsize.
     */
     bool run(int dims, size_t globalsize[],
              size_t localsize[], bool sync, const Queue& q=Queue());
+
+    /** @brief Run the OpenCL kernel
+     *
+     * @param dims the work problem dimensions. It is the length of globalsize and localsize. It can be either 1, 2 or 3.
+     * @param globalsize work items for each dimension. This value is passed to OpenCL without changes.
+     * @param localsize work-group size for each dimension.
+     * @param sync specify whether to wait for OpenCL computation to finish before return.
+     * @param q command queue
+     */
+    bool run_(int dims, size_t globalsize[], size_t localsize[], bool sync, const Queue& q=Queue());
+
     bool runTask(bool sync, const Queue& q=Queue());
 
-    /** @brief Similar to synchronized run() call with returning of kernel execution time
+    /** @brief Similar to synchronized run_() call with returning of kernel execution time
+     *
      * Separate OpenCL command queue may be used (with CL_QUEUE_PROFILING_ENABLE)
      * @return Execution time in nanoseconds or negative number on error
      */
@@ -597,7 +613,7 @@ protected:
 class CV_EXPORTS Program
 {
 public:
-    Program();
+    Program() CV_NOEXCEPT;
     Program(const ProgramSource& src,
             const String& buildflags, String& errmsg);
     Program(const Program& prog);
@@ -642,7 +658,7 @@ class CV_EXPORTS ProgramSource
 public:
     typedef uint64 hash_t; // deprecated
 
-    ProgramSource();
+    ProgramSource() CV_NOEXCEPT;
     explicit ProgramSource(const String& module, const String& name, const String& codeStr, const String& codeHash);
     explicit ProgramSource(const String& prog); // deprecated
     explicit ProgramSource(const char* prog); // deprecated
@@ -711,7 +727,7 @@ protected:
 class CV_EXPORTS PlatformInfo
 {
 public:
-    PlatformInfo();
+    PlatformInfo() CV_NOEXCEPT;
     explicit PlatformInfo(void* id);
     ~PlatformInfo();
 
@@ -720,7 +736,12 @@ public:
 
     String name() const;
     String vendor() const;
+
+    /// See CL_PLATFORM_VERSION
     String version() const;
+    int versionMajor() const;
+    int versionMinor() const;
+
     int deviceNumber() const;
     void getDevice(Device& device, int d) const;
 
@@ -771,7 +792,7 @@ CV_EXPORTS void buildOptionsAddMatrixDescription(String& buildOptions, const Str
 class CV_EXPORTS Image2D
 {
 public:
-    Image2D();
+    Image2D() CV_NOEXCEPT;
 
     /**
     @param src UMat object from which to get image properties and data

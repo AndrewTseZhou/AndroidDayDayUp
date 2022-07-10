@@ -9,7 +9,7 @@
   <application>
     <service
       android:enabled="true"
-      android:exported="true"
+      android:exported="false"
       android:name=".MyAidlService"
       android:process=":remote">
       <intent-filter>

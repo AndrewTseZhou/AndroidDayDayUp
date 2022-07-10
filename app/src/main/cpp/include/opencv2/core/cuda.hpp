@@ -126,7 +126,7 @@ public:
     GpuMat(int rows, int cols, int type, Allocator* allocator = defaultAllocator());
     GpuMat(Size size, int type, Allocator* allocator = defaultAllocator());
 
-    //! constucts GpuMat and fills it with the specified value _s
+    //! constructs GpuMat and fills it with the specified value _s
     GpuMat(int rows, int cols, int type, Scalar s, Allocator* allocator = defaultAllocator());
     GpuMat(Size size, int type, Scalar s, Allocator* allocator = defaultAllocator());
 
@@ -699,7 +699,7 @@ public:
     {
         DEFAULT        = 0x00,  /**< Default event flag */
         BLOCKING_SYNC  = 0x01,  /**< Event uses blocking synchronization */
-        DISABLE_TIMING = 0x02,  /**< Event will not startRecord timing data */
+        DISABLE_TIMING = 0x02,  /**< Event will not record timing data */
         INTERPROCESS   = 0x04   /**< Event is suitable for interprocess use. DisableTiming must be set */
     };
 

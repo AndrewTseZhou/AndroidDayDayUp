@@ -44,11 +44,12 @@
 
 #include <vector>
 #include <opencv2/core.hpp>
+#include "opencv2/core/async.hpp"
 
-#if !defined CV_DOXYGEN && !defined CV_DNN_DONT_ADD_EXPERIMENTAL_NS
-#define CV__DNN_EXPERIMENTAL_NS_BEGIN namespace experimental_dnn_34_v11 {
+#if !defined CV_DOXYGEN && !defined CV_STATIC_ANALYSIS && !defined CV_DNN_DONT_ADD_EXPERIMENTAL_NS
+#define CV__DNN_EXPERIMENTAL_NS_BEGIN namespace experimental_dnn_34_v23 {
 #define CV__DNN_EXPERIMENTAL_NS_END }
-namespace cv { namespace dnn { namespace experimental_dnn_34_v11 { } using namespace experimental_dnn_34_v11; }}
+namespace cv { namespace dnn { namespace experimental_dnn_34_v23 { } using namespace experimental_dnn_34_v23; }}
 #else
 #define CV__DNN_EXPERIMENTAL_NS_BEGIN
 #define CV__DNN_EXPERIMENTAL_NS_END
@@ -73,10 +74,18 @@ CV__DNN_EXPERIMENTAL_NS_BEGIN
         //! DNN_BACKEND_DEFAULT equals to DNN_BACKEND_INFERENCE_ENGINE if
         //! OpenCV is built with Intel's Inference Engine library or
         //! DNN_BACKEND_OPENCV otherwise.
-        DNN_BACKEND_DEFAULT,
+        DNN_BACKEND_DEFAULT = 0,
         DNN_BACKEND_HALIDE,
-        DNN_BACKEND_INFERENCE_ENGINE,
-        DNN_BACKEND_OPENCV
+        DNN_BACKEND_INFERENCE_ENGINE,            //!< Intel's Inference Engine computational backend
+                                                 //!< @sa setInferenceEngineBackendType
+        DNN_BACKEND_OPENCV,
+        // OpenCV 4.x: DNN_BACKEND_VKCOM,
+        // OpenCV 4.x: DNN_BACKEND_CUDA,
+
+#ifdef __OPENCV_BUILD
+        DNN_BACKEND_INFERENCE_ENGINE_NGRAPH = 1000000,     // internal - use DNN_BACKEND_INFERENCE_ENGINE + setInferenceEngineBackendType()
+        DNN_BACKEND_INFERENCE_ENGINE_NN_BUILDER_2019,      // internal - use DNN_BACKEND_INFERENCE_ENGINE + setInferenceEngineBackendType()
+#endif
     };
 
     /**
@@ -85,16 +94,15 @@ CV__DNN_EXPERIMENTAL_NS_BEGIN
      */
     enum Target
     {
-        DNN_TARGET_CPU,
+        DNN_TARGET_CPU = 0,
         DNN_TARGET_OPENCL,
         DNN_TARGET_OPENCL_FP16,
         DNN_TARGET_MYRIAD,
-        //! FPGA device with CPU fallbacks using Inference Engine's Heterogeneous plugin.
-        DNN_TARGET_FPGA
+        DNN_TARGET_FPGA  //!< FPGA device with CPU fallbacks using Inference Engine's Heterogeneous plugin.
     };
 
     CV_EXPORTS std::vector< std::pair<Backend, Target> > getAvailableBackends();
-    CV_EXPORTS std::vector<Target> getAvailableTargets(Backend be);
+    CV_EXPORTS_W std::vector<Target> getAvailableTargets(dnn::Backend be);
 
     /** @brief This class provides all data needed to initialize layer.
      *
@@ -278,6 +286,8 @@ CV__DNN_EXPERIMENTAL_NS_BEGIN
 
         virtual Ptr<BackendNode> initInfEngine(const std::vector<Ptr<BackendWrapper> > &inputs);
 
+        virtual Ptr<BackendNode> initNgraph(const std::vector<Ptr<BackendWrapper> > &inputs, const std::vector<Ptr<BackendNode> >& nodes);
+
        /**
         * @brief Automatic Halide scheduling based on layer hyper-parameters.
         * @param[in] node Backend node with Halide functions.
@@ -344,8 +354,11 @@ CV__DNN_EXPERIMENTAL_NS_BEGIN
                                      const int requiredOutputs,
                                      std::vector<MatShape> &outputs,
                                      std::vector<MatShape> &internals) const;
+
         virtual int64 getFLOPS(const std::vector<MatShape> &inputs,
                                const std::vector<MatShape> &outputs) const {CV_UNUSED(inputs); CV_UNUSED(outputs); return 0;}
+
+        virtual bool updateMemoryShapes(const std::vector<MatShape> &inputs);
 
         CV_PROP String name; //!< Name of the layer instance, can be used for logging or other internal purposes.
         CV_PROP String type; //!< Type name which was used for creating layer by layer factory.
@@ -374,7 +387,7 @@ CV__DNN_EXPERIMENTAL_NS_BEGIN
         CV_WRAP Net();  //!< Default constructor.
         CV_WRAP ~Net(); //!< Destructor frees the net only if there aren't references to the net anymore.
 
-        /** @brief Create a network from Intel's Model Optimizer intermediate representation.
+        /** @brief Create a network from Intel's Model Optimizer intermediate representation (IR).
          *  @param[in] xml XML configuration file with network's topology.
          *  @param[in] bin Binary file with trained weights.
          *  Networks imported from Intel's Model Optimizer are launched in Intel's Inference Engine
@@ -382,9 +395,38 @@ CV__DNN_EXPERIMENTAL_NS_BEGIN
          */
         CV_WRAP static Net readFromModelOptimizer(const String& xml, const String& bin);
 
+        /** @brief Create a network from Intel's Model Optimizer in-memory buffers with intermediate representation (IR).
+         *  @param[in] bufferModelConfig buffer with model's configuration.
+         *  @param[in] bufferWeights buffer with model's trained weights.
+         *  @returns Net object.
+         */
+        CV_WRAP static
+        Net readFromModelOptimizer(const std::vector<uchar>& bufferModelConfig, const std::vector<uchar>& bufferWeights);
+
+        /** @brief Create a network from Intel's Model Optimizer in-memory buffers with intermediate representation (IR).
+         *  @param[in] bufferModelConfigPtr buffer pointer of model's configuration.
+         *  @param[in] bufferModelConfigSize buffer size of model's configuration.
+         *  @param[in] bufferWeightsPtr buffer pointer of model's trained weights.
+         *  @param[in] bufferWeightsSize buffer size of model's trained weights.
+         *  @returns Net object.
+         */
+        static
+        Net readFromModelOptimizer(const uchar* bufferModelConfigPtr, size_t bufferModelConfigSize,
+                                            const uchar* bufferWeightsPtr, size_t bufferWeightsSize);
+
         /** Returns true if there are no layers in the network. */
         CV_WRAP bool empty() const;
 
+        /** @brief Dump net to String
+         *  @returns String with structure, hyperparameters, backend, target and fusion
+         *  Call method after setInput(). To see correct backend, target and fusion run after forward().
+         */
+        CV_WRAP String dump();
+        /** @brief Dump net structure, hyperparameters, backend, target and fusion to dot file
+         *  @param path   path to output file with .dot extension
+         *  @see dump()
+         */
+        CV_WRAP void dumpToFile(const String& path);
         /** @brief Adds new layer to the net.
          *  @param name   unique name of the adding layer.
          *  @param type   typename of the adding layer (type must be registered in LayerRegister).
@@ -418,7 +460,7 @@ CV__DNN_EXPERIMENTAL_NS_BEGIN
          *  @param inpPin descriptor of the second layer input.
          *
          * Descriptors have the following template <DFN>&lt;layer_name&gt;[.input_number]</DFN>:
-         * - the first part of the template <DFN>layer_name</DFN> is sting name of the added layer.
+         * - the first part of the template <DFN>layer_name</DFN> is string name of the added layer.
          *   If this part is empty then the network input pseudo layer will be used;
          * - the second optional part of the template <DFN>input_number</DFN>
          *   is either number of the layer input, either label one.
@@ -445,12 +487,25 @@ CV__DNN_EXPERIMENTAL_NS_BEGIN
          */
         CV_WRAP void setInputsNames(const std::vector<String> &inputBlobNames);
 
+        /** @brief Specify shape of network input.
+         */
+        CV_WRAP void setInputShape(const String &inputName, const MatShape& shape);
+
         /** @brief Runs forward pass to compute output of layer with name @p outputName.
          *  @param outputName name for layer which output is needed to get
          *  @return blob for first output of specified layer.
          *  @details By default runs forward pass for the whole network.
          */
         CV_WRAP Mat forward(const String& outputName = String());
+
+        /** @brief Runs forward pass to compute output of layer with name @p outputName.
+         *  @param outputName name for layer which output is needed to get
+         *  @details By default runs forward pass for the whole network.
+         *
+         *  This is an asynchronous version of forward(const String&).
+         *  dnn::DNN_BACKEND_INFERENCE_ENGINE backend is required.
+         */
+        CV_WRAP AsyncArray forwardAsync(const String& outputName = String());
 
         /** @brief Runs forward pass to compute output of layer with name @p outputName.
          *  @param outputBlobs contains all output blobs for specified layer.
@@ -657,9 +712,11 @@ CV__DNN_EXPERIMENTAL_NS_BEGIN
         CV_WRAP void enableFusion(bool fusion);
 
         /** @brief Returns overall time for inference and timings (in ticks) for layers.
+         *
          * Indexes in returned vector correspond to layers ids. Some layers can be fused with others,
-         * in this case zero ticks count will be return for that skipped layers.
-         * @param timings vector for tick timings for all layers.
+         * in this case zero ticks count will be return for that skipped layers. Supported by DNN_BACKEND_OPENCV on DNN_TARGET_CPU only.
+         *
+         * @param[out] timings vector for tick timings for all layers.
          * @return overall ticks for model inference.
          */
         CV_WRAP int64 getPerfProfile(CV_OUT std::vector<double>& timings);
@@ -787,6 +844,7 @@ CV__DNN_EXPERIMENTAL_NS_BEGIN
       *                  * `*.t7` | `*.net` (Torch, http://torch.ch/)
       *                  * `*.weights` (Darknet, https://pjreddie.com/darknet/)
       *                  * `*.bin` (DLDT, https://software.intel.com/openvino-toolkit)
+      *                  * `*.onnx` (ONNX, https://onnx.ai/)
       * @param[in] config Text file contains network configuration. It could be a
       *                   file with the following extensions:
       *                  * `*.prototxt` (Caffe, http://caffe.berkeleyvision.org/)
@@ -827,13 +885,54 @@ CV__DNN_EXPERIMENTAL_NS_BEGIN
      *  Networks imported from Intel's Model Optimizer are launched in Intel's Inference Engine
      *  backend.
      */
-    CV_EXPORTS_W Net readNetFromModelOptimizer(const String &xml, const String &bin);
+    CV_EXPORTS_W
+    Net readNetFromModelOptimizer(const String &xml, const String &bin);
+
+    /** @brief Load a network from Intel's Model Optimizer intermediate representation.
+     *  @param[in] bufferModelConfig Buffer contains XML configuration with network's topology.
+     *  @param[in] bufferWeights Buffer contains binary data with trained weights.
+     *  @returns Net object.
+     *  Networks imported from Intel's Model Optimizer are launched in Intel's Inference Engine
+     *  backend.
+     */
+    CV_EXPORTS_W
+    Net readNetFromModelOptimizer(const std::vector<uchar>& bufferModelConfig, const std::vector<uchar>& bufferWeights);
+
+    /** @brief Load a network from Intel's Model Optimizer intermediate representation.
+     *  @param[in] bufferModelConfigPtr Pointer to buffer which contains XML configuration with network's topology.
+     *  @param[in] bufferModelConfigSize Binary size of XML configuration data.
+     *  @param[in] bufferWeightsPtr Pointer to buffer which contains binary data with trained weights.
+     *  @param[in] bufferWeightsSize Binary size of trained weights data.
+     *  @returns Net object.
+     *  Networks imported from Intel's Model Optimizer are launched in Intel's Inference Engine
+     *  backend.
+     */
+    CV_EXPORTS
+    Net readNetFromModelOptimizer(const uchar* bufferModelConfigPtr, size_t bufferModelConfigSize,
+                                           const uchar* bufferWeightsPtr, size_t bufferWeightsSize);
 
     /** @brief Reads a network model <a href="https://onnx.ai/">ONNX</a>.
      *  @param onnxFile path to the .onnx file with text description of the network architecture.
      *  @returns Network object that ready to do forward, throw an exception in failure cases.
      */
     CV_EXPORTS_W Net readNetFromONNX(const String &onnxFile);
+
+    /** @brief Reads a network model from <a href="https://onnx.ai/">ONNX</a>
+     *         in-memory buffer.
+     *  @param buffer memory address of the first byte of the buffer.
+     *  @param sizeBuffer size of the buffer.
+     *  @returns Network object that ready to do forward, throw an exception
+     *        in failure cases.
+     */
+    CV_EXPORTS Net readNetFromONNX(const char* buffer, size_t sizeBuffer);
+
+    /** @brief Reads a network model from <a href="https://onnx.ai/">ONNX</a>
+     *         in-memory buffer.
+     *  @param buffer in-memory buffer that stores the ONNX model bytes.
+     *  @returns Network object that ready to do forward, throw an exception
+     *        in failure cases.
+     */
+    CV_EXPORTS_W Net readNetFromONNX(const std::vector<uchar>& buffer);
 
     /** @brief Creates blob from .pb file.
      *  @param path to the .pb file with input tensor.
@@ -944,7 +1043,7 @@ CV__DNN_EXPERIMENTAL_NS_BEGIN
      * @param eta a coefficient in adaptive threshold formula: \f$nms\_threshold_{i+1}=eta\cdot nms\_threshold_i\f$.
      * @param top_k if `>0`, keep at most @p top_k picked indices.
      */
-    CV_EXPORTS_W void NMSBoxes(const std::vector<Rect>& bboxes, const std::vector<float>& scores,
+    CV_EXPORTS void NMSBoxes(const std::vector<Rect>& bboxes, const std::vector<float>& scores,
                                const float score_threshold, const float nms_threshold,
                                CV_OUT std::vector<int>& indices,
                                const float eta = 1.f, const int top_k = 0);
@@ -959,13 +1058,6 @@ CV__DNN_EXPERIMENTAL_NS_BEGIN
                              CV_OUT std::vector<int>& indices,
                              const float eta = 1.f, const int top_k = 0);
 
-    /** @brief Release a Myriad device is binded by OpenCV.
-     *
-     * Single Myriad device cannot be shared across multiple processes which uses
-     * Inference Engine's Myriad plugin.
-     */
-    CV_EXPORTS_W void resetMyriadDevice();
-
 //! @}
 CV__DNN_EXPERIMENTAL_NS_END
 }
@@ -973,5 +1065,8 @@ CV__DNN_EXPERIMENTAL_NS_END
 
 #include <opencv2/dnn/layer.hpp>
 #include <opencv2/dnn/dnn.inl.hpp>
+
+/// @deprecated Include this header directly from application. Automatic inclusion will be removed
+#include <opencv2/dnn/utils/inference_engine.hpp>
 
 #endif  /* OPENCV_DNN_DNN_HPP */

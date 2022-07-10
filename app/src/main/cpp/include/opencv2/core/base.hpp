@@ -188,7 +188,7 @@ enum NormTypes {
                  norm =  \forkthree
                  { \| \texttt{src1} \| _{L_2} ^{2} = \sum_I \texttt{src1}(I)^2} {if  \(\texttt{normType} = \texttt{NORM_L2SQR}\)}
                  { \| \texttt{src1} - \texttt{src2} \| _{L_2} ^{2} =  \sum_I (\texttt{src1}(I) - \texttt{src2}(I))^2 }{if  \(\texttt{normType} = \texttt{NORM_L2SQR}\) }
-                 { \left(\frac{\|\texttt{src1}-\texttt{src2}\|_{L_2} }{\|\texttt{src2}\|_{L_2}}\right)^2 }{if  \(\texttt{normType} = \texttt{NORM_RELATIVE | NORM_L2}\) }
+                 { \left(\frac{\|\texttt{src1}-\texttt{src2}\|_{L_2} }{\|\texttt{src2}\|_{L_2}}\right)^2 }{if  \(\texttt{normType} = \texttt{NORM_RELATIVE | NORM_L2SQR}\) }
                  \f]
                  */
                  NORM_L2SQR     = 5,
@@ -326,8 +326,8 @@ CV_INLINE CV_NORETURN void errorNoReturn(int _code, const String& _err, const ch
 
 // In practice, some macro are not processed correctly (noreturn is not detected).
 // We need to use simplified definition for them.
-#define CV_Error(...) do { abort(); } while (0)
-#define CV_Error_( code, args ) do { cv::format args; abort(); } while (0)
+#define CV_Error(code, msg) do { (void)(code); (void)(msg); abort(); } while (0)
+#define CV_Error_(code, args) do { (void)(code); (void)(cv::format args); abort(); } while (0)
 #define CV_Assert( expr ) do { if (!(expr)) abort(); } while (0)
 #define CV_ErrorNoReturn CV_Error
 #define CV_ErrorNoReturn_ CV_Error_
@@ -586,6 +586,21 @@ _AccTp normInf(const _Tp* a, const _Tp* b, int n)
  @param val A function argument.
  */
 CV_EXPORTS_W float cubeRoot(float val);
+
+/** @overload
+
+cubeRoot with argument of `double` type calls `std::cbrt(double)` (C++11) or falls back on `pow()` for C++98 compilation mode.
+*/
+static inline
+double cubeRoot(double val)
+{
+#ifdef CV_CXX11
+    return std::cbrt(val);
+#else
+    double v = pow(abs(val), 1/3.);  // pow doesn't support negative inputs with fractional exponents
+    return val >= 0 ? v : -v;
+#endif
+}
 
 /** @brief Calculates the angle of a 2D vector in degrees.
 

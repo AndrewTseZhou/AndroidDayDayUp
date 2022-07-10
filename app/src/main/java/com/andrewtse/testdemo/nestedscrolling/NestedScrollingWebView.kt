@@ -38,9 +38,9 @@ class NestedScrollingWebView : WebView, NestedScrollingChild2 {
     private var mScroller: Scroller? = null
     private var mVelocityTracker: VelocityTracker? = null
 
-    constructor(context: Context?) : this(context, null)
-    constructor(context: Context?, attrs: AttributeSet?) : this(context, attrs, 0)
-    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+    constructor(context: Context) : this(context, null)
+    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
         mChildHelper = NestedScrollingChildHelper(this)
         isNestedScrollingEnabled = true
         mScroller = Scroller(context)

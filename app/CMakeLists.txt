@@ -8,7 +8,7 @@ cmake_minimum_required(VERSION 3.4.1)
 # OpenCV配置 start
 set(CMAKE_VERBOSE_MAKEFILE on)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11 -fexceptions -frtti")
-set(libs "${CMAKE_SOURCE_DIR}/src/main/jniLibs")
+set(libs "${CMAKE_SOURCE_DIR}/libs")
 # Specifies a path to native header files.
 include_directories(${CMAKE_SOURCE_DIR}/src/main/cpp/include)
 

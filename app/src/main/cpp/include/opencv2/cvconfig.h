@@ -13,9 +13,6 @@
 /* Compile for 'real' NVIDIA GPU architectures */
 #define CUDA_ARCH_BIN ""
 
-/* Create PTX or BIN for 1.0 compute capability */
-/* #undef CUDA_ARCH_BIN_OR_PTX_10 */
-
 /* NVIDIA GPU features are used */
 #define CUDA_ARCH_FEATURES ""
 
@@ -127,6 +124,8 @@
 
 /* NVIDIA Video Decoding API*/
 /* #undef HAVE_NVCUVID */
+/* #undef HAVE_NVCUVID_HEADER */
+/* #undef HAVE_DYNLINK_NVCUVID_HEADER */
 
 /* NVIDIA Video Encoding API*/
 /* #undef HAVE_NVCUVENC */
@@ -135,6 +134,9 @@
 /* #undef HAVE_OPENCL */
 /* #undef HAVE_OPENCL_STATIC */
 /* #undef HAVE_OPENCL_SVM */
+
+/* NVIDIA OpenCL D3D Extensions support */
+/* #undef HAVE_OPENCL_D3D11_NV */
 
 /* OpenEXR codec */
 #define HAVE_OPENEXR

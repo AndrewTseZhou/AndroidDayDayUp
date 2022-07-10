@@ -65,7 +65,8 @@
         <activity android:name=".activity.TempActivity" />
         <activity android:name=".bezier_view.water_wave.WaterWaveActivity" />
         <activity android:name=".activity.BezierDemoActivity" />
-        <activity android:name=".LaunchActivity">
+        <activity android:name=".LaunchActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -157,7 +158,8 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <receiver android:name=".suspension_window.DeviceBootReceiver">
+        <receiver android:name=".suspension_window.DeviceBootReceiver"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
 

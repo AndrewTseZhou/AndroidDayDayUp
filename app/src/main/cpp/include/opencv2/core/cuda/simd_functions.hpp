@@ -492,7 +492,7 @@ namespace cv { namespace cuda { namespace device
         r = a & 0x7f7f7f7f; // clear msbs
         t = b & 0x7f7f7f7f; // clear msbs
         s = s & 0x80808080; // msb sum bits
-        r = r + t;          // add without msbs, startRecord carry-out in msbs
+        r = r + t;          // add without msbs, record carry-out in msbs
         r = r ^ s;          // sum of msb sum and carry-in bits, w/o carry-out
     #endif /* __CUDA_ARCH__ >= 300 */
 
@@ -516,7 +516,7 @@ namespace cv { namespace cuda { namespace device
         r = a | 0x80808080; // set msbs
         t = b & 0x7f7f7f7f; // clear msbs
         s = s & 0x80808080; // inverted msb sum bits
-        r = r - t;          // subtract w/o msbs, startRecord inverted borrows in msb
+        r = r - t;          // subtract w/o msbs, record inverted borrows in msb
         r = r ^ s;          // combine inverted msb sum bits and borrows
     #endif
 

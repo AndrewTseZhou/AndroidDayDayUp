@@ -31,12 +31,12 @@
 #ifndef OPENCV_FLANN_KDTREE_INDEX_H_
 #define OPENCV_FLANN_KDTREE_INDEX_H_
 
+//! @cond IGNORED
+
 #include <algorithm>
 #include <map>
-#include <cassert>
 #include <cstring>
 
-#include "general.h"
 #include "nn_index.h"
 #include "dynamic_bitset.h"
 #include "matrix.h"
@@ -431,7 +431,7 @@ private:
         if (trees_>0) {
             searchLevelExact(result, vec, tree_roots_[0], 0.0, epsError);
         }
-        assert(result.full());
+        CV_Assert(result.full());
     }
 
     /**
@@ -460,7 +460,7 @@ private:
 
         delete heap;
 
-        assert(result.full());
+        CV_Assert(result.full());
     }
 
 
@@ -500,7 +500,7 @@ private:
         NodePtr bestChild = (diff < 0) ? node->child1 : node->child2;
         NodePtr otherChild = (diff < 0) ? node->child2 : node->child1;
 
-        /* Create a branch startRecord for the branch not taken.  Add distance
+        /* Create a branch record for the branch not taken.  Add distance
             of this feature boundary (we don't attempt to correct for any
             use of this feature in a parent node, which is unlikely to
             happen and would have only a small effect).  Don't bother
@@ -537,7 +537,7 @@ private:
         NodePtr bestChild = (diff < 0) ? node->child1 : node->child2;
         NodePtr otherChild = (diff < 0) ? node->child2 : node->child1;
 
-        /* Create a branch startRecord for the branch not taken.  Add distance
+        /* Create a branch record for the branch not taken.  Add distance
             of this feature boundary (we don't attempt to correct for any
             use of this feature in a parent node, which is unlikely to
             happen and would have only a small effect).  Don't bother
@@ -622,5 +622,7 @@ private:
 };   // class KDTreeForest
 
 }
+
+//! @endcond
 
 #endif //OPENCV_FLANN_KDTREE_INDEX_H_
